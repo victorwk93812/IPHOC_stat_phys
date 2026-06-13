@@ -1,0 +1,122 @@
+\chapter{Appendix}
+\section{Supplement: Joule and Joule--Thomson Coefficients} \label{sec:JT_coeff}
+
+Joule's free-expansion experiment and the Joule--Thomson throttle experiment do \emph{not} directly measure $\pa{U}{V}_T$ or $\pa{H}{P}_T$. What they measure are
+\[
+    \mu_J \equiv \pa{T}{V}_U \qquad \text{and} \qquad \mu_{JT} \equiv \pa{T}{P}_H,
+\]
+the temperature change at constant $U$ (Joule) or constant $H$ (Joule--Thomson). The link between the two pairs of partial derivatives is a standard application of the chain rule for partial derivatives.
+
+\paragraph{Derivation.} Write the total differentials of $U$ and $H$ using their convenient variables:
+\[
+    \dd U = \pa{U}{V}_T \dd V + \pa{U}{T}_V \dd T,
+    \qquad
+    \dd H = \pa{H}{P}_T \dd P + \pa{H}{T}_P \dd T.
+\]
+Set $\dd U = 0$ in the first (Joule) and $\dd H = 0$ in the second (Joule--Thomson), then move the $\dd T$ term to the other side and divide:
+\[
+    \pa{T}{V}_U = -\,\frac{\pa{U}{V}_T}{\pa{U}{T}_V},
+    \qquad
+    \pa{T}{P}_H = -\,\frac{\pa{H}{P}_T}{\pa{H}{T}_P}.
+\]
+(This is the so-called triple-product identity, $\pa{x}{y}_z \pa{y}{z}_x \pa{z}{x}_y = -1$.) Multiplying both sides by the denominator and absorbing the minus sign,
+\[
+    \boxed{\,\pa{U}{V}_T = -C_V\,\pa{T}{V}_U,\qquad \pa{H}{P}_T = -C_P\,\pa{T}{P}_H\,}.
+\]
+The experimental observation that an ideal gas shows no temperature change in either experiment is therefore equivalent to $\pa{U}{V}_T = \pa{H}{P}_T = 0$, which we used above.
+
+\paragraph{Joule's experiment.}
+A gas occupies one half of an adiabatically insulated, rigid container; the other half is evacuated. The diaphragm is ruptured and the gas free-expands. \emph{Adiabatic} $\Rightarrow$ $\dbar Q = 0$. \emph{Free expansion} into vacuum: no external pressure resists the motion of the gas front, so $\dbar W = 0$. By the First Law $\dd U = 0$. Joule measured the temperature change of the gas (and the bath surrounding it) and found it negligible for a dilute gas --- hence $\pa{T}{V}_U \approx 0$, equivalently $\pa{U}{V}_T \approx 0$.
+
+\paragraph{Joule--Thomson experiment.}
+Gas is forced steadily through a porous plug from high pressure $P_1$ to low pressure $P_2$ in an adiabatically insulated tube. Adiabatic: $\dbar Q = 0$. The work done \emph{on} the gas is $P_1 V_1 - P_2 V_2$ (push-in from the left minus push-out on the right). So $U_2 - U_1 = P_1 V_1 - P_2 V_2$, i.e.\
+\[
+    U_1 + P_1 V_1 = U_2 + P_2 V_2 \;\;\Longleftrightarrow\;\; H_1 = H_2.
+\]
+The process is therefore isenthalpic, and a measurement of $\Delta T/\Delta P$ at fixed $H$ yields the Joule--Thomson coefficient.
+
+\section{Proof of Clausius's inequality.} \label{sec:clausius_inequality}
+\begin{lemma}
+For any thermodynamic substance, the internal energy and pressure are related to the absolute temperature $T$ via the modern thermodynamic equation of state:
+\[
+\left(\frac{\partial U}{\partial V}\right)_T + P = T\left(\frac{\partial P}{\partial T}\right)_V
+\]
+\end{lemma}
+
+\begin{proof}
+Consider an infinitesimal reversible Carnot cycle enclosing a tiny area $dT\,dV$ in the $(T,V)$ state space plane. 
+
+1. \textbf{Net Work ($dW$):} The net work performed over this closed boundary is given by the cyclic integral $\oint P\,dV$. We apply a coordinate transformation from the $(P,V)$ plane to the $(T,V)$ plane using the Jacobian determinant:
+\[
+dW = \iint_\Omega \frac{\partial(P,V)}{\partial(T,V)}\,dT\,dV = \iint_\Omega \left[ \left(\frac{\partial P}{\partial T}\right)_V \left(\frac{\partial V}{\partial V}\right)_T - \left(\frac{\partial P}{\partial V}\right)_T \left(\frac{\partial V}{\partial T}\right)_V \right] dT\,dV
+\]
+Since $\left(\frac{\partial V}{\partial V}\right)_T = 1$ and $\left(\frac{\partial V}{\partial T}\right)_V = 0$, the Jacobian simplifies to:
+\[
+dW = \left(\frac{\partial P}{\partial T}\right)_V dT\,dV
+\]
+
+2. \textbf{Heat Absorbed ($Q_H$):} Heat is absorbed during the isothermal expansion step at temperature $T$. Along an isotherm, $dT = 0$. The First Law for a reversible process, $\delta Q_{\text{rev}} = dU + P\,dV$, expands via the chain rule to:
+\[
+\delta Q_{\text{rev}} = \left(\frac{\partial U}{\partial T}\right)_V dT + \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV
+\]
+Setting $dT = 0$, the heat input for the infinitesimal expansion step is:
+\[
+Q_H = \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV
+\]
+
+By Lord Kelvin's formal definition of the absolute temperature scale, the efficiency $\eta$ of an engine operating between $T+dT$ and $T$ depends strictly on these absolute temperatures:
+\[
+\eta = \frac{dW}{Q_H} = \frac{dT}{T}
+\]
+Substituting our geometric expressions for $dW$ and $Q_H$ into the efficiency relation yields:
+\[
+\frac{\left(\frac{\partial P}{\partial T}\right)_V dT\,dV}{\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV} = \frac{dT}{T}
+\]
+Canceling the differentials $dT$ and $dV$ from both sides and rearranging terms gives the desired result:
+\[
+\left(\frac{\partial U}{\partial V}\right)_T + P = T\left(\frac{\partial P}{\partial T}\right)_V
+\]
+\end{proof}
+
+\begin{theorem}[Clausius Equality]
+For an arbitrary closed, reversible path $C$ in a simply connected thermodynamic state space, the cyclic integral of the heat transferred divided by the absolute temperature vanishes:
+\[
+\oint_C \frac{\delta Q_{\text{rev}}}{T} = 0
+\]
+\end{theorem}
+
+\begin{proof}
+Let $(T,V)$ be the independent coordinates spanning the thermodynamic state space. We express the line integral around an arbitrary closed curve $C$ that bounds a simply connected region $\Omega$:
+\[
+\oint_C \frac{\delta Q_{\text{rev}}}{T} = \oint_C \left( \frac{1}{T}\left(\frac{\partial U}{\partial T}\right)_V dT + \frac{1}{T}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV \right)
+\]
+This represents a classical planar differential form $\oint_C (M\,dT + N\,dV)$, where:
+\[
+M(T,V) = \frac{1}{T}\left(\frac{\partial U}{\partial T}\right)_V, \quad N(T,V) = \frac{1}{T}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]
+\]
+Applying Green's Theorem in the plane, we map the line integral over the boundary $C = \partial \Omega$ to a double integral over the surface region $\Omega$:
+\[
+\oint_C (M\,dT + N\,dV) = \iint_\Omega \left( \frac{\partial N}{\partial T} - \frac{\partial M}{\partial V} \right) dT\,dV
+\]
+We compute the respective cross-derivatives using the product rule. First, differentiating $N$ with respect to $T$ at constant $V$:
+\[
+\frac{\partial N}{\partial T} = -\frac{1}{T^2}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] + \frac{1}{T}\left[ \frac{\partial^2 U}{\partial T \partial V} + \left(\frac{\partial P}{\partial T}\right)_V \right]
+\]
+Next, differentiating $M$ with respect to $V$ at constant $T$:
+\[
+\frac{\partial M}{\partial V} = \frac{1}{T}\frac{\partial^2 U}{\partial V \partial T}
+\]
+Assuming the internal energy $U(T,V)$ is a smooth, exact state function, its mixed partial derivatives commute by Clairaut's Theorem ($\frac{\partial^2 U}{\partial T \partial V} = \frac{\partial^2 U}{\partial V \partial T}$). Evaluating the integrand $(\frac{\partial N}{\partial T} - \frac{\partial M}{\partial V})$ causes the second-order derivatives of $U$ to cancel perfectly:
+\[
+\frac{\partial N}{\partial T} - \frac{\partial M}{\partial V} = -\frac{1}{T^2}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] + \frac{1}{T}\left(\frac{\partial P}{\partial T}\right)_V
+\]
+Invoking Lemma 1, we substitute $\left(\frac{\partial U}{\partial V}\right)_T + P = T\left(\frac{\partial P}{\partial T}\right)_V$ into the bracketed term:
+\[
+\frac{\partial N}{\partial T} - \frac{\partial M}{\partial V} = -\frac{1}{T^2}\left[T\left(\frac{\partial P}{\partial T}\right)_V\right] + \frac{1}{T}\left(\frac{\partial P}{\partial T}\right)_V = 0
+\]
+Because the curl of this thermodynamic 1-form vanishes identically everywhere within $\Omega$, the area integral evaluates to zero:
+\[
+\oint_C \frac{\delta Q_{\text{rev}}}{T} = \iint_\Omega (0)\,dT\,dV = 0
+\]
+Thus, $\frac{\delta Q_{\text{rev}}}{T}$ constitutes an exact differential $dS$, proving the Clausius Equality.
+\end{proof}

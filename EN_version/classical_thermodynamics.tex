@@ -1,0 +1,747 @@
+% =============================================================
+%  classical_thermodynamics.tex
+%  Lecture notes on classical thermodynamics for IPhO training.
+%  Intended to be \input from lecture.tex (no \documentclass /
+%  \begin{document} here).  The parent file should provide:
+%      \usepackage{amsmath,amssymb,amsthm,mathtools}
+%      \usepackage{bm}
+%      \usepackage{enumitem}
+%      (and any theorem-environment definitions one wants)
+% =============================================================
+
+% --- shorthand commands used below --------------------------------------
+\providecommand{\dd}{\mathrm{d}}
+\providecommand{\dbar}{\mathchar'26\mkern-12mu\mathrm{d}}  % inexact differential
+\providecommand{\pd}[2]{\dfrac{\partial #1}{\partial #2}}
+\providecommand{\pa}[2]{\left(\dfrac{\partial #1}{\partial #2}\right)}
+
+% =============================================================
+\chapter{Classical Thermodynamics}
+% =============================================================
+
+\noindent\textit{Reference: A.~H.~Carter, \emph{Classical and Statistical Thermodynamics}, Chapters~1--6.}
+
+%==============================================================
+\section{Zeroth and First Laws}
+%==============================================================
+
+\subsection{Some Basic Definitions}
+
+\paragraph{Open, closed and isolated systems.}
+\begin{itemize}
+    \item An \emph{open system} can exchange both energy and matter with its surroundings.
+    \item A \emph{closed system} can exchange energy but not matter (the walls are impermeable, but heat and work can still flow).
+    \item An \emph{isolated system} can exchange neither: no heat, no work, no particles.
+\end{itemize}
+
+\paragraph{Properties/ State functions.}
+A (thermodynamic) \emph{property}, or a \emph{state function}, is a quantity associated to a system's state. It 
+has nothing to do with processes or paths; it is a function of the current macroscopic state only.
+
+\textcolor{blue}{Question: For a system with fixed number of particles, how many independent state functions are needed to specify the state of the system?}
+
+\paragraph{Intensive vs.\ extensive properties.}
+A property is \emph{extensive} if doubling the size of the system doubles its value, and \emph{intensive} if it remains unchanged. Examples:
+\begin{center}
+\begin{tabular}{ll}
+    \textbf{Extensive:} & $V$ (volume), $N$ (number of particles), $U$ (internal energy), $S$ (entropy)\\
+    \textbf{Intensive:} & $T$ (temperature), $P$ (pressure), $\rho$ (density), $\mu$ (chemical potential)
+\end{tabular}
+\end{center}
+
+\paragraph{Non-State functions.}
+By contrast, heat $Q$ and work $W$ are \emph{not} state functions --- their definitions 
+depend on the process, usually through a integral along that process. 
+
+\paragraph{Reversible and quasi-static processes.}
+\begin{itemize}
+    \item A process is \emph{quasi-static} if it is carried out slowly enough that the system passes through a continuous sequence of equilibrium states. Each intermediate state can be plotted as a point in (e.g.) the $P$--$V$ plane.
+    \item A process is \emph{reversible} if it is quasi-static \emph{and} produces no net dissipation, so it can be retraced in the opposite direction without leaving any change in the surroundings.
+\end{itemize}
+All reversible processes are quasi-static, but not vice versa. 
+%--------------------------------------------------------------
+\subsection{Basic Axioms}
+
+The ``laws'' of classical thermodynamics are \emph{axioms}; 
+they are not derived from anything more fundamental, thus cannot be proved.
+
+\paragraph{Zeroth Law.}
+\begin{quote}
+\textit{If body $A$ is in thermal equilibrium with body $B$, and body $B$ is in thermal equilibrium with body $C$, then $A$ is also in thermal equilibrium with $C$.}
+\end{quote}
+
+\paragraph{Why this matters.}
+The zeroth law allows us to define a unique state function, temperature $T$, which 
+is a function of $P$ and $V$. 
+
+See the link \url{https://chatgpt.com/share/6a2a1a67-af90-8324-9088-46a92193deea} for more details.
+
+Once $T$ exists, a simple system in mechanical equilibrium has the macroscopic variables $(P,V,T)$. These are not independent: there is one constraint (the \emph{equation of state}), so the system has two degrees of freedom. For an ideal gas the equation of state is the familiar
+\[
+    PV = nRT.
+\]
+For real substances the equation of state is more complicated (van der Waals, virial expansion, etc.) but the count of variables and constraints is the same.
+
+%==============================================================
+\section{Work, Heat, and the First Law}
+%==============================================================
+
+\subsection{The First Law}
+
+\begin{quote}
+\textbf{Axiom (First Law).} \textit{Heat is a form of energy, and energy is conserved.}
+\end{quote}
+In differential form,
+\[
+    \boxed{\,\dd U = \dbar Q + \dbar W\,}.
+\]
+Here $U$ is the \emph{internal energy} of the system, $\dbar Q$ is the heat absorbed by the system, and $\dbar W$ is the work done \emph{on} the system. 
+\paragraph{Remarks.}
+\begin{itemize}
+    \item The First Law states that even though $Q$ and $W$ are path dependent, their sum $\dd U$ is an exact differential --- that is, $U$ is a state function. (Joule's paddle-wheel experiment)
+    \item The First Law applies to \emph{irreversible} processes as well. However, in an irreversible process $\dbar W \neq -P\,\dd V$ in general: one must use the \emph{external} pressure that is doing the squeezing, not the (possibly undefined) internal pressure.
+    \item Sign conventions differ between textbooks. We adopt ``work done \emph{on} the system'', so reversible compression gives $\dbar W = -P\,\dd V > 0$ for $\dd V < 0$. 
+\end{itemize}
+
+%--------------------------------------------------------------
+\subsection{Four Processes and Heat Capacities}
+
+\paragraph{Constants-volume processes.}
+If the volume is held fixed and we ignore any exotic forms of work, $\dbar W = 0$ so $\dd U = \dbar Q$. Therefore
+\[
+    \pa{U}{T}_{V} = \pa{Q}{T}_{V} \equiv C_V.
+\]
+$C_V$ is a state-function derivative, while $(\dbar Q/\dd T)_V$ is the operationally measurable quantity (the heat needed per unit temperature rise at fixed $V$).
+
+\paragraph{Enthalpy and constant-pressure processes.}
+Define the \emph{enthalpy}
+\[
+    H \equiv U + PV.
+\]
+$H$ is also a state function (it is built from state functions). Its differential is
+\[
+    \dd H = \dd U + P\,\dd V + V\,\dd P = \dbar Q + V\,\dd P,
+\]
+where in the last step we used $\dd U = \dbar Q - P\,\dd V$ (i.e.\ reversible $P\,V$-work only). At constant pressure $\dd P = 0$ and hence
+\[
+    \pa{H}{T}_{P} = \pa{Q}{T}_{P} \equiv C_P.
+\]
+
+\paragraph{Isothermal processes and Adiabatic processes.}
+We don't have much to say here yet, without the assumption of and ideal gas. We'll talk about them more in the next section. 
+
+%--------------------------------------------------------------
+
+\subsection{Ideal Gas}
+The properties introduced in this section \textbf{only apply to ideal gas}. 
+\paragraph{A. Ideal gas in isothermal and adiabatic processes.}
+\begin{theorem}
+    For ideal gases,
+    \begin{itemize}
+        \item \textbf{Isothermal} ($\dd T = 0$, ideal gas): $\dd U = 0$, so $\dbar Q = -\dbar W = nRT\,\dd V/V$. Integrating, $W_{\text{on}} = -nRT\ln(V_f/V_i)$.
+        \item \textbf{Adiabatic} ($\dbar Q = 0$): the standard derivation gives $PV^\gamma = \mathrm{const}$ and $TV^{\gamma-1} = \mathrm{const}$, where $\gamma = C_P/C_V$.
+    \end{itemize}   
+\end{theorem}
+\begin{proof}
+    I bet you've seen this before. Skipped.
+\end{proof}
+
+\paragraph{B. U and H only depends on energy.}
+\begin{theorem}
+    For ideal gases, 
+    \[
+        \left.\pa{U}{V}\right|_T = 0, \qquad \left.\pa{H}{P}\right|_T = 0.
+    \]
+\end{theorem}
+\begin{proof}
+    Found through an experiment. See section \ref{sec:JT_coeff}. 
+\end{proof}
+
+\paragraph{C. Mayer's Relation.} 
+\begin{theorem}
+    $C_P - C_V = nR$ for an ideal gas. 
+\end{theorem}
+
+\begin{proof}
+    Take $T$ and $V$ as independent variables. From $U=U(T,V)$,
+\[
+    \dd U = \pa{U}{T}_V \dd T + \pa{U}{V}_T \dd V = C_V\,\dd T + \pa{U}{V}_T \dd V.
+\]
+Combining with the First Law $\dd U = \dbar Q - P\,\dd V$ (reversible work) gives
+\[
+    \dbar Q = C_V\,\dd T + \left[P + \pa{U}{V}_T\right]\dd V.
+\]
+For an ideal gas, the Gay-Lussac/Joule expansion experiment shows $\pa{U}{V}_T = 0$ (more on this in a moment), so
+\[
+    \dbar Q = C_V\,\dd T + P\,\dd V.
+\]
+Now switch to $T$ and $P$ as the independent variables using $PV=nRT$, so $P\,\dd V + V\,\dd P = nR\,\dd T$, i.e.\ $P\,\dd V = nR\,\dd T - V\,\dd P$. Substituting,
+\[
+    \dbar Q = (C_V + nR)\,\dd T - V\,\dd P.
+\]
+Reading off the coefficient at constant $P$ ($\dd P = 0$),
+\[
+    \boxed{\,C_P = C_V + nR\,}.
+\]
+\end{proof}
+\subsection{Exercise.}
+\zh{
+\textbf{2020 複選P1.}
+
+(A) 奧圖（Otto）引擎為內燃機常見的型態。其運轉步驟如圖1所示：
+
+$1 \to 2$ 與 $3 \to 4$ 為絕熱過程，$2 \to 3$ 與 $4 \to 1$ 為等體積過程。試求奧圖引擎之效率 $e_O$。
+
+(B) 阿特金森（Atkinson）引擎為由奧圖引擎改良而來，近年來越來越常見於私家車輛上。
+
+其標準運轉步驟如圖2所示：
+$1 \to 2$ 與 $3 \to 4$ 為絕熱過程，$2 \to 3$ 為等體積過程，而 $4 \to 1$ 近似等壓過程。
+
+阿特金森引擎基本精神為，與奧圖引擎相較，降低壓縮比
+$r_C = \frac{V_2}{V_1}$ 來減少燃燒油氣量，
+
+但仍具有相同的對外作功膨脹比
+$r_E = \frac{V_4}{V_3}$。試求阿特金森引擎之效率 $e_A$。
+
+(C) 比較 $r_C$ 相同（燃燒室容量／燃料相同）的奧圖引擎與阿特金森引擎，
+
+試定量比較兩個引擎的效率，何者效率較高？
+}
+
+\begin{center}
+    \includegraphics{../Figure/Otto_engine.png}
+    \includegraphics{../Figure/atkinson_engine.png}
+\end{center}
+
+\paragraph{Solution.}
+\textbf{(A)}
+\begin{align*}
+W_{\text{total}} &= W_{3 \to 4} + W_{1 \to 2} \quad \text{Since } 1 \to 2 \text{ and } 3 \to 4 \text{ are \zh{絕熱},} \\
+&= - (\Delta U_{3 \to 4} + \Delta U_{1 \to 2}) \\
+&= - nkR (T_4 - T_3 + T_2 - T_1).
+\end{align*}
+
+\begin{align*}
+Q_{\text{abs}} &= Q_{2 \to 3} \quad \text{since \zh{等體積},} \\
+&= \Delta U_{2 \to 3} = n k R (T_3 - T_2).
+\end{align*}
+
+\begin{align*}
+\Rightarrow e_O &= - \frac{T_4 - T_3 + T_2 - T_1}{T_3 - T_2} = 1 - \frac{T_4 - T_1}{T_3 - T_2} \\
+&= 1 - \left( \frac{V_2}{V_1} \right)^{\gamma - 1}.
+\end{align*}
+
+\vspace{1em}
+\textbf{(B)}
+\begin{align*}
+Q_{\text{abs}} &= k R (T_3 - T_2). \\
+W_{\text{total}} &= W_{1 \to 2} + W_{3 \to 4} + W_{4 \to 1} \\
+&= - kR (T_4 - T_3 + T_2 - T_1) + P_1 (V_1 - V_4).
+\end{align*}
+
+\begin{align*}
+e_A &= \left[ 1 - \frac{T_4 - T_1}{T_3 - T_2} \right] + \frac{P_1(V_1 - V_4)}{n k R (T_3 - T_2)} \\
+&= 1 - \frac{P_1 V_4 - P_1 V_1}{V_L (P_3 - P_2)} + \frac{1}{k} \cdot \frac{P_1 V_4 - P_1 V_1}{V_L (P_3 - P_2)} \\
+&= 1 - \left( 1 + \frac{1}{k} \right) \cdot \frac{P_1 V_4 - P_1 V_1}{V_L (P_3 - P_2)} \\
+&= 1 - \gamma \cdot \frac{V_4 - V_1}{V_L \left[ \left( \frac{V_4}{V_L} \right)^\gamma - \left( \frac{V_1}{V_L} \right)^\gamma \right]} \\
+&= 1 - \gamma \frac{r_E - r_C^{-1}}{r_E^\gamma - r_C^{-\gamma}} = 1 - \gamma r_C^{\gamma - 1} \cdot \frac{r_C r_E - 1}{(r_C r_E)^\gamma - 1}.
+\end{align*}
+
+\vspace{1em}
+\textbf{(C)}
+\begin{align*}
+\Rightarrow e_O &= 1 - r_C^{\gamma - 1} \\
+e_A &= 1 - r_C^{\gamma - 1} \gamma \frac{x - 1}{x^\gamma - 1}, \quad \text{where } x = r_C r_E = \frac{V_4}{V_1} \\
+e_A - e_O &= r_C^{\gamma - 1} \left( 1 - \gamma \frac{x - 1}{x^\gamma - 1} \right) = r_C^{\gamma - 1} \frac{(x^\gamma - 1) - \gamma(x - 1)}{x^\gamma - 1}.
+\end{align*}
+
+If $x > 1$, $x^\gamma - 1 > 0$. If $0 < x < 1$ and $\gamma > 1$, $x^\gamma - 1 < 0$.
+
+Let $f(x) = (x^\gamma - 1) - \gamma(x - 1)$. $f(1) = 0$, $f(0) = \gamma - 1$.
+\begin{align*}
+f'(x) &= \gamma(x^{\gamma - 1} - 1) < 0 \quad \forall \ 0 < x < 1 \\
+f'(x) &> 0 \quad \forall \ x > 1
+\end{align*}
+\begin{align*}
+\Rightarrow \frac{x^\gamma - 1 - \gamma(x - 1)}{x^\gamma - 1} &< 0 \quad \forall \ 0 < x < 1, \\
+&> 0 \quad \forall \ x > 1.
+\end{align*}
+%==============================================================
+\section{The Second Law}
+%==============================================================
+
+\subsection{Heat Engines}
+
+\begin{wrapfigure}{r}[1.5cm]{0.4\textwidth}
+  \centering
+  \includegraphics[width=0.4\textwidth]{../Figure/Heat_engine.png}
+\end{wrapfigure}
+
+A \emph{heat engine} is a cyclic device that absorbs heat $Q_2$ from a hot reservoir at $T_2$, releases heat $Q_1$ to a cold reservoir at $T_1<T_2$, and delivers net work $W = Q_2 - Q_1$. Its efficiency is
+\[
+    e \equiv \frac{W}{Q_2} = 1 - \frac{Q_1}{Q_2}.
+\]
+Universal experience tells us that some $Q_1>0$ is always wasted to the cold reservoir; you can never have $e=1$. The Second Law is the formalisation of this fact.
+
+%--------------------------------------------------------------
+\subsection{Axiomatic Statements}
+
+\paragraph{Clausius statement.} \textit{No process is possible whose sole effect is the transfer of heat from a colder to a hotter body.}
+
+\paragraph{Kelvin--Planck statement.} \textit{No heat engine can have efficiency $100\%$.} Equivalently, no cyclic device can convert heat entirely into work with no other effect.
+
+The two statements are equivalent (Clausius $\Leftrightarrow$ Kelvin--Planck); each can be proved from the other by chaining hypothetical violators. We will not redo that argument here.
+
+%--------------------------------------------------------------
+\subsection{The Carnot Engine and Carnot's Theorem}
+
+A \emph{Carnot engine} is a reversible heat engine operating as shown in the figure. It could be operated in reverse as well. 
+\begin{figure}[!htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../Figure/Carnot_engine.png}
+        \caption{Carnot engine.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../Figure/Carnot_theorem.png}
+        \caption{Diagram for proof of Carnot's theorem.}
+    \end{subfigure}
+\end{figure}
+
+\begin{theorem}
+\textbf{(Carnot)}All Carnot engines between the same two reservoirs have the same efficiency, regardless of the working substance. No engine can be more efficient than a Carnot engine.
+\end{theorem}
+
+
+\paragraph{Sketch of proof.}
+Suppose there were an engine $M'$ with efficiency $e' > e_{\text{Carnot}}$. Couple $M'$ to a Carnot engine $M$ run backwards as a refrigerator, 
+sized so that the work output of $M'$ exactly drives $M$. 
+The net effect of the combined device is to pump a positive amount of heat from the cold reservoir to the hot reservoir with no net work 
+--- a violation of the Clausius statement. Hence no such $M'$ exists. 
+
+Note that this theorem also shows that ALL Carnot engines have the same efficiency, regardless of the substance. 
+This could be shown by a similar argument: Use the engine with higher efficiency to produce work and the other one as refrigerator. 
+
+The Carnot efficiency turns out to depend only on the two temperatures, which could be derived using ideal gas: 
+\[
+    e_{\text{Carnot}} = 1 - \frac{T_1}{T_2}.
+\]
+This relation can in fact be \emph{used} to define the absolute temperature scale: (Choose $T$ such that $\frac{Q_1}{Q_2} = \frac{T_1}{T_2}$ for a Carnot engine).
+
+%--------------------------------------------------------------
+\subsection{Clausius Inequality}
+We will present a lemma that is essential for the "classical" proof of the ineqaulity using "Carnot cycle slices", 
+which will not be shown here but put in the appendix. 
+\begin{lemma}
+For any thermodynamic substance, the internal energy and pressure are related to the absolute temperature $T$ via the modern thermodynamic equation of state:
+\[
+\left(\frac{\partial U}{\partial V}\right)_T + P = T\left(\frac{\partial P}{\partial T}\right)_V
+\]
+\end{lemma}
+
+We will also leave the proof of the lemma to appendix as well. Now, we state the Clausius inequality: 
+
+\begin{theorem}
+    For any cyclic process, 
+    \begin{enumerate}
+        \item For a reversible cycle, $\displaystyle \oint \frac{\dbar Q_{\text{rev}}}{T} = 0$.
+        \item For an irreversible cycle, $\displaystyle \oint \frac{\dbar Q_{\text{irr}}}{T} < 0$.
+    \end{enumerate}
+\end{theorem}
+
+
+\begin{proof}
+Let a system undergo an arbitrary, possibly irreversible, cyclic process. 
+During this cycle, the system exchanges varying amounts of heat $\delta Q$ with its surroundings at varying boundary temperatures $T_{\text{ext}}$.
+
+\textbf{1. The Setup.}
+
+We introduce a massive master heat reservoir maintained at a constant absolute temperature $T_0$. 
+We also imagine that for any value of $T_{\text{ext}}$, there exists a \textbf{reversible auxiliary Carnot engines} working between 
+the master reservoir and $T_{\text{ext}}$.   
+
+Whenever the system absorbs $\delta Q$ at $T_{\text{ext}}$, an auxiliary Carnot engine draws  $\delta Q_0$ from the master reservoir 
+at $T_0$ and delivers $\delta Q$ back to $T_{\text{ext}}$ to cancel the absorption. 
+
+Since these auxiliary engines operate completely reversibly, they strictly satisfy the absolute thermodynamic temperature ratio:
+\[
+\frac{\delta Q_0}{T_0} = \frac{\delta Q}{T_{\text{ext}}} \implies \delta Q_0 = T_0 \frac{\delta Q}{T_{\text{ext}}}
+\]
+
+\textbf{2. Integrating the Full Cycle.}
+
+We allow the main system to complete one full, closed macro-cycle, returning exactly to its initial state and 
+apply the First Law of Thermodynamics to the entire combined universe (consisting of the main system and all auxiliary engines). 
+
+By conservation of energy, the total net mechanical work $W_{\text{net}}$ performed by this combined system 
+must exactly equal the total net heat $Q_0$ extracted from the single master reservoir:
+\[
+W_{\text{net}} = Q_0 = \oint \delta Q_0
+\]
+Substituting our relation for $\delta Q_0$ into the cyclic integral yields:
+\[
+W_{\text{net}} = \oint T_0 \frac{\delta Q}{T_{\text{ext}}}= T_0 \oint \frac{\delta Q}{T_{\text{ext}}}
+\]
+Since the master reservoir temperature $T_0$ remains strictly constant throughout the entire process, it can be factored out of the integral. 
+
+\textbf{3. Applying the Second Law.}  
+According to the \textbf{Kelvin-Planck statement of the Second Law of Thermodynamics}, 
+it is physically impossible to construct a device that operates in a cycle and produces net positive work while exchanging heat with only a single thermal reservoir. 
+If the process is irreversible, the net work must be strictly less than zero. If the process is perfectly reversible, the net work is exactly zero. Thus:
+\[
+W_{\text{net}} \le 0
+\]
+Combining this constraint with our energy balance equation gives:
+\[
+T_0 \oint \frac{\delta Q}{T_{\text{ext}}} \le 0, \qquad \oint \frac{\delta Q}{T_{\text{ext}}} \le 0
+\]
+\end{proof}
+
+\begin{center}
+  \includegraphics[width=0.8\textwidth]{../Figure/clausius_proof.png}
+\end{center}
+
+
+This proof actually proves both the reversible and irreversible cases. It seems that the classical "Carnot cycle slice" proof 
+is actually not necessary. Nevertheless, we still present it in the appendix for completeness. See \ref{sec:clausius_inequality}.
+%--------------------------------------------------------------
+\subsection{Entropy}
+
+Because $\oint \dbar Q_{\text{rev}}/T = 0$ around any closed cycle, the differential form $\dbar Q_{\text{rev}}/T$ is \emph{exact}. 
+There must therefore exist a state function $S$ --- the \emph{entropy} --- whose differential is
+\[
+    \boxed{\,\dd S = \frac{\dbar Q_{\text{rev}}}{T}\,}.
+\]
+The difference $S_B - S_A$ can be computed by integrating $\dbar Q/T$ along \emph{any} reversible path from $A$ to $B$; the result is independent of the path. 
+The absolute value of $S$ remains undefined at this stage, though. (it would require the Third Law, $S \to 0$ as $T \to 0$ for a perfect crystal, which we will not need here).
+
+%==============================================================
+\section{$T\dd S$ Equations}
+%==============================================================
+We have actually presented this lemma earlier and proved it without using the exactness in the appendix, 
+but here we will provide a more elegant version using the exactness of $\dd S$, along with one corresponding to $H$. 
+\subsection{A Useful Lemma from Exactness}
+
+Entropy is a state function, so $\dd S$ is exact. Starting from
+\[
+    \dd S = \frac{\dbar Q}{T} = \frac{\dd U}{T} + \frac{P}{T}\,\dd V
+          = \frac{C_V}{T}\,\dd T + \frac{1}{T}\!\left[P + \pa{U}{V}_T\right]\!\dd V,
+\]
+exactness requires that the mixed partials of the coefficients of $\dd T$ and $\dd V$ agree:
+\[
+    \pd{}{V}\!\left(\frac{C_V}{T}\right)_T = \pd{}{T}\!\left(\frac{1}{T}\!\left[P + \pa{U}{V}_T\right]\right)_V.
+\]
+Working this out and simplifying,
+\[
+    0 = \frac{1}{T}\!\left[\pa{P}{T}_V + \pd{^{2}U}{T\,\partial V}\right] - \frac{1}{T^{2}}\!\left(P + \pa{U}{V}_T\right),
+\]
+which rearranges into the very useful relation
+\[
+    \boxed{\,\pa{U}{V}_T = T\,\pa{P}{T}_V - P\,}.
+\]
+The completely analogous calculation starting from $\dd S = (\dd H - V\,\dd P)/T$ gives
+\[
+    \boxed{\,\pa{H}{P}_T = -T\,\pa{V}{T}_P + V\,}.
+\]
+
+\paragraph{Why these are useful.}
+The two partial derivatives $\pa{U}{V}_T$ and $\pa{H}{P}_T$ were notoriously hard to compute --- Joule and Joule--Thomson told us they vanish for an ideal gas, but for solids and liquids we had no handle on them at all. With these lemmas, all we need are the \emph{measurable} mechanical responses: the thermal expansion coefficient $\beta = \pa{V}{T}_P/V$ and the pressure--temperature derivative $\pa{P}{T}_V$. Both are routine tabletop measurements.
+
+\paragraph{Exercise.}
+\zh{
+(A) 卡諾熱機在兩個不同溫度的熱庫（heat reservoir）循環運作時，其過程均為可逆。
+
+考慮如圖 1 所示的卡諾熱機，熱機由二可逆等溫過程（$a \to b$；$c \to d$）和二可逆絕熱過程（$b \to c$；$d \to a$）組成。
+試計算每一過程中熱機內氣體（假設為 $n$ 莫耳的理想氣體）熵的變化量。
+
+（以氣體壓力 $P$、體積 $V$、溫度 $T$ 和其他相關常數表示。）（8 分）
+
+(B) 現考慮兩個具有相同熱容量 $C$ 的物質，其起始溫度分別為 $T_1$ 和 $T_2$。今有一卡諾熱機
+
+以此二物質為其低溫和高溫熱庫，並假設卡諾熱機運行一循環時，二熱庫的溫度變化，
+
+遠小於其個別的溫度值。
+
+問此二物質的最終溫度為何？過程中卡諾熱機可作的最大功為何？（9 分）
+
+(C) 現考慮三個具有相同熱容量 $C$ 的物質，其起始溫度分別為
+$T_1 = 100\,\mathrm{K}$、
+$T_2 = 300\,\mathrm{K}$
+和
+$T_3 = 300\,\mathrm{K}$。
+
+假設我們可以利用前述的卡諾熱機在物質 1 和 2 之間運轉並輸出功，並以另一在物質 1 和物質 3 之間運轉的卡諾熱機，將所輸出的功完全用於提高物質 3 的溫度。問：
+
+(i) 物質 1 所能達到的最低溫度 $T_L$ 為何？（2 分）
+
+(ii) 物質 3 可以達到的最高溫度 $T_H$ 為何？（6 分）
+}
+\paragraph{Solution.}
+\textbf{(A)} \\
+In a Carnot cycle, all 4 processes are reversible. Thus, the entropy change $\Delta S$ of the gas in each step is given by:
+\[ \Delta S = \int_{i}^{f} \frac{dQ}{T} \]
+For the adiabatic processes ($b \to c$ and $d \to a$):
+\[ \Delta S_{b \to c} = 0, \quad \Delta S_{d \to a} = 0 \quad (\text{since } dQ = 0) \]
+For the isothermal processes ($a \to b$ and $c \to d$):
+\[ dQ = dU + P\,dV = P\,dV = \frac{nRT}{V}\,dV \]
+\[ \Rightarrow \Delta S = \int_{V_i}^{V_f} \frac{nRT}{TV}\,dV = nR \ln \frac{V_f}{V_i} \]
+Thus,
+\[ \Delta S_{a \to b} = nR \ln \frac{V_b}{V_a}, \quad \Delta S_{c \to d} = nR \ln \frac{V_d}{V_c} \]
+Note that by the properties of an adiabatic process ($TV^{\gamma-1} = \text{const}$), we have:
+\begin{align*}
+T_H V_a^{\gamma-1} &= T_L V_d^{\gamma-1} \\
+T_H V_b^{\gamma-1} &= T_L V_c^{\gamma-1}
+\end{align*}
+Dividing the two equations yields:
+\[ \left(\frac{V_a}{V_b}\right)^{\gamma-1} = \left(\frac{V_d}{V_c}\right)^{\gamma-1} \implies \frac{V_a}{V_b} = \frac{V_d}{V_c} \implies \frac{V_b}{V_a} = \frac{V_c}{V_d} \]
+Therefore, the entropy change in the second isothermal process is:
+\[ \Delta S_{c \to d} = nR \ln \frac{V_d}{V_c} = -nR \ln \frac{V_c}{V_d} = -nR \ln \frac{V_b}{V_a} = -\Delta S_{a \to b} \]
+(This is consistent with the fact that $S$ is a state variable, so $\Delta S_{\text{cycle}} = 0$.)
+
+\vspace{1em}
+\textbf{(B)} \\
+Let the initial temperatures of the two reservoirs be $T_{1,i}$ and $T_{2,i}$ with $T_{2,i} > T_{1,i}$. Let $\rho = \frac{V_b}{V_a}$ be the expansion ratio. 
+For an infinitesimal cycle, the heat exchanged with the reservoirs is:
+\[ dQ_{\text{hot}} = -dQ_{a \to b} \implies C\,dT_2 = -nR T_2 \ln \rho \]
+\[ dQ_{\text{cold}} = dQ_{c \to d, \text{rejected}} \implies C\,dT_1 = nR T_1 \ln \rho \]
+Rearranging these gives:
+\[ -\frac{dT_2}{T_2} = \frac{nR}{C}\ln \rho = \frac{dT_1}{T_1} \]
+Integrating over many cycles until the final equilibrium state $T_{1,f} = T_{2,f} = T_f$:
+\[ \int_{T_{1,i}}^{T_f} \frac{dT_1}{T_1} = -\int_{T_{2,i}}^{T_f} \frac{dT_2}{T_2} \]
+\[ \Rightarrow \ln \frac{T_f}{T_{1,i}} = -\ln \frac{T_f}{T_{2,i}} = \ln \frac{T_{2,i}}{T_f} \]
+\[ \Rightarrow T_f^2 = T_{1,i} T_{2,i} \implies T_f = \sqrt{T_{1,i} T_{2,i}} \]
+(Using the parameters from the problem statement, the final temperature is $\sqrt{T_1 T_2}$.)
+
+The maximum work $W$ done by the engine can be found using energy conservation ($W = -\Delta U_{\text{reservoirs}}$):
+\begin{align*}
+W &= -C(T_f - T_{2,i}) - C(T_f - T_{1,i}) \\
+  &= C(T_{1,i} + T_{2,i} - 2T_f) \\
+  &= C\left(T_{1,i} + T_{2,i} - 2\sqrt{T_{1,i}T_{2,i}}\right) = C\left(\sqrt{T_{2,i}} - \sqrt{T_{1,i}}\right)^2
+\end{align*}
+
+\vspace{1em}
+\textbf{(C)} \\
+Let Engine 1 operate between $T_2$ and $T_1$, extracting heat $Q_h$ from $T_2$, rejecting heat to $T_1$, and producing work $W = \eta_1 Q_h$.
+Let Engine 2 (acting as a heat pump) operate between $T_1$ and $T_3$, using all the work $W$ to pump heat from $T_1$ to $T_3$. The coefficient of performance is $1/\eta_2$.
+Heat delivered to $T_3$ is $Q_3 = W/\eta_2 = (\eta_1/\eta_2)Q_h$.
+Heat extracted from $T_1$ by the pump is $Q_{\text{extracted}} = Q_3 - W = \eta_1\left(\frac{1}{\eta_2}-1\right)Q_h$.
+
+\textbf{(i)} The net heat added to substance 1 is:
+\[ dQ_1 = (1-\eta_1)Q_h - \eta_1\left(\frac{1}{\eta_2}-1\right)Q_h = \left(1 - \frac{\eta_1}{\eta_2}\right)Q_h \]
+Since $T_2 \downarrow$ and $T_3 \uparrow$, we have $\eta_1 \downarrow$ and $\eta_2 \uparrow$. Initially $T_2 = T_3 = 300\,\text{K}$, so $\eta_1 = \eta_2$.
+As the process proceeds, $\eta_1 \le \eta_2$, which implies $1 - \frac{\eta_1}{\eta_2} \ge 0$.
+Thus, $dQ_1 \ge 0$. Since heat is continuously added to substance 1, its temperature never decreases.
+Therefore, the minimum temperature is its initial temperature:
+\[ T_{1,\text{min}} = 100\,\text{K} \]
+
+\textbf{(ii)} For the system of three substances, assuming all processes are reversible, the total entropy change is zero:
+\[ dS_1 + dS_2 + dS_3 = \frac{dQ_1}{T_1} + \frac{dQ_2}{T_2} + \frac{dQ_3}{T_3} = 0 \]
+\[ \Rightarrow C\left(\frac{dT_1}{T_1} + \frac{dT_2}{T_2} + \frac{dT_3}{T_3}\right) = 0 \implies d(\ln(T_1 T_2 T_3)) = 0 \]
+\[ \Rightarrow T_1 T_2 T_3 = \text{const} = 100 \times 300 \times 300 = 9 \times 10^6 \]
+By energy conservation, no net heat or work is exchanged with the environment:
+\[ dQ_1 + dQ_2 + dQ_3 = 0 \implies C(dT_1 + dT_2 + dT_3) = 0 \]
+\[ \Rightarrow T_1 + T_2 + T_3 = \text{const} = 100 + 300 + 300 = 700 \]
+To maximize $T_3$, $T_2$ must decrease until Engine 1 can no longer extract work, which happens when $T_1 = T_2 = T$.
+Substitute $T_1 = T_2 = T$ into the conservation equations:
+\[ 2T + T_3 = 700 \implies T_3 = 700 - 2T \]
+\[ T^2 T_3 = 9 \times 10^6 \implies T^2(700 - 2T) = 9 \times 10^6 \]
+\[ 2T^3 - 700T^2 + 9 \times 10^6 = 0 \implies T^3 - 350T^2 + 4.5 \times 10^6 = 0 \]
+By inspection, $T = 150\,\text{K}$ is a root ($150^3 - 350(150^2) + 4.5 \times 10^6 = 3375000 - 7875000 + 4500000 = 0$).
+Therefore, $T_3 = 700 - 2(150) = 400\,\text{K}$.
+The maximum temperature that substance 3 can reach is:
+\[ T_H = 400\,\text{K} \]
+
+%--------------------------------------------------------------
+\subsection{The Three $T\dd S$ Equations}
+
+We can compute $\dd S$ as a function of any two of $P,V,T$. There are three pairs, hence three forms:
+\begin{align}
+    T\,\dd S &= n C_V\,\dd T + T\,\pa{P}{T}_V\,\dd V, \label{eq:TdS1}\\[4pt]
+    T\,\dd S &= n C_P\,\dd T - T\,\pa{V}{T}_P\,\dd P, \label{eq:TdS2}\\[4pt]
+    T\,\dd S &= n C_P\,\pa{T}{V}_P\,\dd V + n C_V\,\pa{T}{P}_V\,\dd P. \label{eq:TdS3}
+\end{align}
+The derivations are straightforward: write $\dbar Q = T\,\dd S$ in the First Law, then use whichever pair of $(P,V,T)$ you wish as the free variables (the third one is eliminated via the equation of state and the lemma above).
+
+\paragraph{Application: entropy change of an ideal gas.}
+Substituting $\pa{P}{T}_V = nR/V$ into~\eqref{eq:TdS1},
+\[
+    T\,\dd S = n C_V\,\dd T + \frac{nRT}{V}\,\dd V.
+\]
+Dividing through by $T$ and integrating (a slightly informal step: we are assuming $C_V$ is constant, which is fine for monatomic and diatomic ideal gases in the IPhO range),
+\[
+    \boxed{\,\Delta S = n C_V \ln\!\frac{T}{T_0} + nR \ln\!\frac{V}{V_0}\,}.
+\]
+This formula is the workhorse of olympiad entropy problems. Note that it is for an ideal gas only.
+
+
+%==============================================================
+\section{Thermodynamic Potentials}
+%==============================================================
+
+\subsection{The Four Energies}
+
+We have already met two state functions with units of energy, $U$ and $H$. We now introduce two more:
+\begin{align*}
+    A &\equiv U - TS \qquad \text{(Helmholtz free energy)},\\
+    G &\equiv H - TS \qquad \text{(Gibbs free energy)}.
+\end{align*}
+All four are state functions, and their differentials (after substituting $\dbar Q_{\text{rev}}=T\,\dd S$ and $\dbar W_{\text{rev}}=-P\,\dd V$) are
+\[
+    \boxed{\begin{aligned}
+        \dd U &= T\,\dd S - P\,\dd V, \vphantom{\left(\frac{\partial U}{\partial S}\right)_V} \\
+        \dd H &= T\,\dd S + V\,\dd P, \vphantom{\left(\frac{\partial H}{\partial S}\right)_P} \\
+        \dd A &= -S\,\dd T - P\,\dd V, \vphantom{\left(\frac{\partial A}{\partial T}\right)_V} \\
+        \dd G &= -S\,\dd T + V\,\dd P, \vphantom{\left(\frac{\partial G}{\partial T}\right)_P}
+    \end{aligned}}
+    \quad\implies\quad
+    \begin{aligned}
+        \left(\frac{\partial U}{\partial S}\right)_V &= T, & \left(\frac{\partial U}{\partial V}\right)_S &= -P, \\[1ex]
+        \left(\frac{\partial H}{\partial S}\right)_P &= T, & \left(\frac{\partial H}{\partial P}\right)_S &= V, \\[1ex]
+        \left(\frac{\partial A}{\partial T}\right)_V &= -S, & \left(\frac{\partial A}{\partial V}\right)_T &= -P, \\[1ex]
+        \left(\frac{\partial G}{\partial T}\right)_P &= -S, & \left(\frac{\partial G}{\partial P}\right)_T &= V.
+    \end{aligned}
+\]
+Note that we could "read off" the coefficients like this because now the differentials are exact, unlike the original $\dd U = \dbar Q + \dbar W$.
+Read each formula off the variables on its right-hand side: $U(S,V)$, $H(S,P)$, $A(T,V)$, $G(T,P)$. 
+Althought now we have four variables, $\{P,V,T,S\}$, the degree of freedom is still 2. 
+
+\paragraph{Why introduce $A$ and $G$?}
+\begin{itemize}
+    \item $A$ is minimised at equilibrium when $T$ and $V$ are held fixed 
+    \item $G$ is minimised at equilibrium when $T$ and $P$ are held fixed
+\end{itemize}
+
+%--------------------------------------------------------------
+\subsection{Maxwell Relations}
+
+Each of the four potentials is a state function, so each of their differentials is exact, and the mixed partial derivatives of any two coefficients are equal. From $\dd U = T\,\dd S - P\,\dd V$, for instance,
+\[
+    \pa{T}{V}_S = -\pa{P}{S}_V.
+\]
+Doing this for all four potentials gives the four \emph{Maxwell relations}:
+\[
+    \boxed{\begin{aligned}
+        \pa{T}{V}_S &= -\pa{P}{S}_V \qquad (\text{from } \dd U),\\[4pt]
+        \pa{T}{P}_S &= \phantom{-}\pa{V}{S}_P \qquad (\text{from } \dd H),\\[4pt]
+        \pa{S}{V}_T &= \phantom{-}\pa{P}{T}_V \qquad (\text{from } \dd A),\\[4pt]
+        \pa{S}{P}_T &= -\pa{V}{T}_P \qquad (\text{from } \dd G).
+    \end{aligned}}
+\]
+The last two are by far the most useful in problem solving --- you will see them appear in essentially every $T\dd S$ computation.
+
+%==============================================================
+\section{Multi-phase and Multi-species Systems}
+%==============================================================
+
+\subsection{Adding Composition Variables}
+
+So far each system has been a single phase with a single chemical species. Once we allow more, the variable count goes up: with two phases (say liquid and vapour of the same substance) the total mole number $n_1 + n_2$ is fixed, but the split between phases is a new degree of freedom.
+
+Using $G$ as an example, for a two-phase system,
+\[
+    \dd G = -S\,\dd T + V\,\dd P + \pa{G}{n_1}_{T,P,n_2}\dd n_1 + \pa{G}{n_2}_{T,P,n_1}\dd n_2.
+\]
+Because the total $n_1 + n_2$ is conserved, $\dd n_2 = -\dd n_1$, and the last two terms combine into
+\[
+    \dd G = -S\,\dd T + V\,\dd P + (\mu_1 - \mu_2)\,\dd n_1,
+\]
+where
+\[
+    \mu_i \equiv \pa{G}{n_i}_{T,P,n_{j\neq i}}
+\]
+is the \emph{chemical potential} of species (or phase) $i$. The chemical potential is the change in $G$ per mole of $i$ added at fixed $T,P$ and other species.
+
+%--------------------------------------------------------------
+\subsection{Gibbs Energy and Spontaneity}
+
+We now justify the standard chemistry-textbook claim:
+\begin{quote}
+\textit{At constant $T$ and $P$, a spontaneous process satisfies $\Delta G < 0$.}
+\end{quote}
+
+\paragraph{Setup.} Consider a closed system in thermal and mechanical contact with surroundings at fixed $T$ and $P$. Suppose a process absorbs heat $\Delta Q$ from the surroundings. The surroundings, being large, change reversibly, so their entropy change is
+\[
+    \Delta S_{\text{sur}} = -\frac{\Delta Q}{T}.
+\]
+\paragraph{First law for the system.} Assuming the work is purely $PV$-work and the system path can be made reversible,
+\[
+    \Delta Q = \Delta U + P\,\Delta V.
+\]
+\paragraph{Clausius for the imagined return.} Now imagine running a (hypothetical) reversible process that brings the system back to its initial state. By the Clausius inequality applied to the irreversible cycle (forward irreversible + reverse reversible),
+\[
+    \Delta Q < T\,\Delta S_{\text{sys}}.
+\]
+(Equality holds iff the forward step was already reversible.)
+
+\paragraph{Putting it together.} Combine the two:
+\[
+    \Delta U + P\,\Delta V < T\,\Delta S
+    \;\;\Longleftrightarrow\;\;
+    \Delta U + P\,\Delta V - T\,\Delta S < 0
+    \;\;\Longleftrightarrow\;\;
+    \Delta(U + PV - TS) < 0,
+\]
+where in the last step we used that $T$ and $P$ are held constant. The combination $U + PV - TS$ is precisely $G$, so
+\[
+    \boxed{\,\Delta G < 0\,}
+\]
+for any spontaneous process at constant $T$ and $P$, with $\Delta G = 0$ at equilibrium.
+
+%==============================================================
+\section{Phase Equilibrium and the Clapeyron Equation}
+%==============================================================
+
+\subsection{The Clapeyron Equation}
+
+Consider two phases ($1$ = liquid, $2$ = vapour, say) of the same substance coexisting at some temperature $T$ and pressure $P$. Let $n_1,n_2$ be the mole numbers of the two phases, with $n_1+n_2$ fixed. If a small amount $-\dd n_1 = \dd n_2 > 0$ converts phase~$1$ into phase~$2$, the Gibbs energy changes by
+\[
+    \dd G = (\mu_2 - \mu_1)\,\dd n_1.
+\]
+At equilibrium $\dd G = 0$ for arbitrary $\dd n_1$, which forces
+\[
+    \boxed{\,\mu_1(T,P) = \mu_2(T,P)\,}.
+\]
+This is the \emph{phase equilibrium condition}: across the coexistence curve in the $(T,P)$ plane, the chemical potentials of the two phases are equal.
+
+\paragraph{Sliding along the coexistence curve.}
+Now suppose we change $T\to T+\dd T$ and $P\to P+\dd P$ in such a way that the two phases continue to coexist. Then $\mu_1=\mu_2$ must persist, i.e.\ $\dd\mu_1=\dd\mu_2$. Using the molar versions of $\dd G = -S\,\dd T + V\,\dd P$,
+\[
+    \dd\mu_1 = -s_1\,\dd T + v_1\,\dd P
+    = -s_2\,\dd T + v_2\,\dd P
+    = \dd\mu_2,
+\]
+where lowercase $s_i, v_i$ are the molar entropy and molar volume of phase $i$. Solving for $\dd P/\dd T$,
+\[
+    \boxed{\,\frac{\dd P}{\dd T} = \frac{s_2 - s_1}{v_2 - v_1} = \frac{\Delta H_{\text{trans}}}{T\,\Delta v}\,}.
+\]
+The last equality uses $T\,\Delta s = \Delta H_{\text{trans}}$, the molar latent heat of the transition (valid because the transition occurs at constant $T$ and $P$). This is the \textbf{Clapeyron equation}.
+
+%--------------------------------------------------------------
+\subsection{The Clausius--Clapeyron Equation}
+
+For the liquid--vapour transition, we make two further approximations:
+\begin{enumerate}[label=(\roman*)]
+    \item the vapour behaves as an ideal gas, so $v_{\text{vap}} = RT/P$;
+    \item the vapour volume vastly exceeds the liquid volume, so $\Delta v \approx v_{\text{vap}}$.
+\end{enumerate}
+Substituting into the Clapeyron equation,
+\[
+    \frac{\dd P}{\dd T} = \frac{\Delta H}{T\,(RT/P)} = \frac{\Delta H}{R}\,\frac{P}{T^{2}}.
+\]
+Separating variables and integrating (assuming $\Delta H$ approximately constant over the temperature range),
+\[
+    \int_{P_0}^{P} \frac{\dd P'}{P'} = \frac{\Delta H}{R}\int_{T_0}^{T} \frac{\dd T'}{T'^{2}}
+    \;\;\Longrightarrow\;\;
+    \boxed{\,\ln\!\frac{P}{P_0} = -\frac{\Delta H}{R}\!\left(\frac{1}{T} - \frac{1}{T_0}\right)\,},
+\]
+or in exponentiated form,
+\[
+    P = P_0 \exp\!\left[-\frac{\Delta H}{R}\!\left(\frac{1}{T} - \frac{1}{T_0}\right)\right].
+\]
+This is the \textbf{Clausius--Clapeyron equation}. 
+% =============================================================
+%  End of classical_thermodynamics.tex
+% =============================================================

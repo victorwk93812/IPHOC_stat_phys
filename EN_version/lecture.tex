@@ -1,0 +1,118 @@
+% =============================================================
+%  lecture.tex
+%  Master file for IPhO Training Lecture Notes (textbook build).
+%
+%  To compile:    pdflatex lecture.tex
+%
+%  Each topic lives in its own file under this directory and is
+%  brought in via \input below.  Add new chapters by:
+%      1. creating <topic>.tex that begins with `\chapter{...}`
+%      2. listing it in the "Main matter" block below
+% =============================================================
+
+\documentclass[11pt,a4paper,openany]{book}
+
+% ---------- core math + symbols ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+
+% ---------- layout ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{parskip}        % blank line between paragraphs, no first-line indent
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{framed}
+
+% ---------- fonts ----------
+\usepackage{fontspec}
+\usepackage{unicode-math}
+
+% ---------- graphics, color, links ----------
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage[hidelinks,
+            colorlinks=true,
+            linkcolor=blue!60!black,
+            urlcolor=blue!60!black,
+            citecolor=blue!60!black]{hyperref}
+
+% ---------- nicer chapter / section headings ----------
+\usepackage[explicit]{titlesec}
+\titleformat{\chapter}[display]
+    {\normalfont\Huge\bfseries}
+    {\filright\Large\chaptertitlename\ \thechapter}
+    {1ex}
+    {\titlerule\vspace{1ex}\filright #1}
+\titlespacing*{\chapter}{0pt}{-30pt}{30pt}
+
+% ---------- theorem-like environments ----------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{note}{Note}
+
+% ---------- shared math shorthand ----------
+% (Sub-files can \providecommand the same names; first definition wins.)
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dbar}{\mathop{\overline{\mathrm{d}}}}    % inexact differential
+\newcommand{\pd}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\pa}[2]{\left(\dfrac{\partial #1}{\partial #2}\right)}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\zh}[1]{{\fontspec{AR PL KaitiM Big5} #1}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\E}{\bar{E}}
+\newcommand{\N}{\bar{N}}
+
+% ---------- metadata ----------
+\title{
+    \vspace{2cm}
+    {\Huge\bfseries Selected Topics in Physics}\\[0.5em]
+    {\Large Lecture Notes for IPhO Training}
+    \vspace{1cm}
+}
+\author{Hung-Wei}
+\date{\today}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+\tableofcontents
+
+% =============================================================
+\mainmatter
+% =============================================================
+
+% ---- Main matter: one \input per chapter ----
+\input{classical_thermodynamics.tex}
+\input{statistical_thermodynamics.tex}
+\input{appendix.tex}
+
+% Add additional topics here, e.g.:
+% \input{kinetic_theory.tex}
+% \input{electromagnetism.tex}
+% \input{optics.tex}
+% \input{modern_physics.tex}
+
+% =============================================================
+\backmatter
+% =============================================================
+
+% Bibliography, index, etc. can go here.
+% \bibliographystyle{plain}
+% \bibliography{refs}
+
+\end{document}

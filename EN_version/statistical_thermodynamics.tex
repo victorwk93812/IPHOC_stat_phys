@@ -1,0 +1,172 @@
+\chapter{Statistical Thermodynamics}
+
+\noindent\textit{Reference: R.K. Pathria, P.D. Beele. \emph{Statistical Mechanics}, Chapters~1--8.}
+\section{Microcanonical ensemble}
+\paragraph{Macrostates and macrostates.}
+\begin{enumerate}
+    \item \textbf{Macrostate:} In microcanonical ensemble, the macrostate is specified by $N,V,E$.
+    \item \textbf{Microstate:} Classically, it's represented by the positions and momenta of all particles (phase space), while quantum mechanically it's represented by the number of particles occupying each energy level, etc.
+\end{enumerate}
+
+\paragraph{Postulates.}
+\begin{enumerate}[label=(\arabic*)]
+    \item All microstates are equally probable.
+    \item The system is in equilibrium $\iff$ the system is in the macrostate where the number of microstates is maximized.
+\end{enumerate}
+
+\textcolor{blue}{Q: How do we define "1 microstate" classically when the phase space is continuous?}
+
+\begin{definition}[Statistical temperature]
+The statistical temperature $\beta$ is defined as
+\[
+    \beta = \left(\frac{\partial(\ln\Omega(N,V,E))}{\partial E}\right)_{N,V}.
+\]
+\end{definition}
+
+\begin{theorem}
+Two systems are in equilibrium only if their $\beta$ are equal.
+\end{theorem}
+
+\begin{proof}
+Consider two systems that could exchange energies, with $N_i,V_i$ fixed.
+Total energy $E_0 = E_1+E_2 = \mathrm{const}$.
+The total number of microstates is
+\[
+    \Omega(E_0,E_1) = \Omega_1(E_1)\,\Omega_2(E_0-E_1).
+\]
+Maximum condition: when $E_1 = \E_1$, the corresponding $\E_2 = E_0-\E_1$ satisfies
+\[
+    \frac{\partial\Omega_1}{\partial E_1}(\E_1)\,\Omega_2(\E_2) - \Omega_1(\E_1)\frac{\partial\Omega_2}{\partial E_2}(\E_2) = 0.
+\]
+Hence
+\[
+    \frac{\partial(\ln\Omega_1)}{\partial E_1} = \frac{\partial(\ln\Omega_2)}{\partial E_2}
+    \quad\Longrightarrow\quad \beta_1 = \beta_2. \qedhere
+\]
+\end{proof}
+
+\begin{framed}
+    \textbf{Postulate.} Planck assumes: 
+    \[
+        S = k\ln\Omega,
+    \]
+\end{framed}
+If this is true, in thermodynamics we have $\bigl(\frac{\partial S}{\partial E}\bigr)_{N,V} = \frac{1}{T}$, we then have $k\beta = \tfrac{1}{T}$, or $\beta = \tfrac{1}{kT}$.
+
+\begin{remark}
+    ...
+    \begin{itemize}
+        \item Planck probably get this idea in reverse: He first noticed that $\bigl(\frac{\partial S}{\partial E}\bigr)_{N,V} = \frac{1}{T}$, and then figured out $S = k\ln\Omega$ might make sense. 
+        \item We have not confirmed the $k$ is indeed $k_B$ yet. We will see that this is indeed the case when we apply the postulates to ideal gas.
+    \end{itemize}
+\end{remark}
+
+\textbf{\textcolor{blue}{Q: How do we confirm that $S=k\ln\Omega$ is correct?}}
+
+\textbf{Ans:} We define statistical $S$ using an inspiration, and then imitate classical thermodynamics to define $T,P,C_v,$ etc. 
+Using ideal gas as example (see next subsection), we then find that $PV=NkT$, $C_V=\frac{3}{2}NkT$ etc., supporting this guess.
+
+\begin{proposition}
+If the volume of two systems can be changed, then not only do we need $T_1=T_2$ (i.e.\ $\beta_1=\beta_2$), but also
+\[
+    \eta_1 = \eta_2,\qquad \text{where } \eta = \left(\frac{\partial\ln\Omega}{\partial V}\right)_{N,E}\bigg|_{V=\bar V}.
+\]
+\end{proposition}
+
+\begin{proof}
+Same as the $\beta$ case.
+\end{proof}
+
+\begin{proposition}
+Given $S=k\ln\Omega$ and $T\,dS = dE + P\,dV - \mu\,dN$, we have
+\[
+    \eta = \frac{P}{kT}.
+\]
+On the other hand, if $\zeta = \left(\frac{\partial\ln\Omega}{\partial N}\right)_{V,E}\big|_{N=\N}$, then
+\[
+    \zeta = -\frac{\mu}{kT}.
+\]
+\end{proposition}
+
+\subsection{Example: Ideal Gas}
+
+\paragraph{I. Ideal-gas Law.}
+With merely the fact that $\Omega(N,E,V)\propto V^{N}$, we could already have:
+\[
+    \frac{P}{kT} = \frac{N}{V} \quad\Longrightarrow\quad PV = NkT.
+\]
+We could see that $k$ is indeed $k_B$ we are used to.
+
+\paragraph{II. Monatomic Ideal Gas in Adiabatic Reversible Process.}
+The energy of a single atom (in a box) can be written as
+\[
+    \varepsilon = \frac{h^{2}}{8mV^{2/3}}\,(n_x^{2}+n_y^{2}+n_z^{2}).
+\]
+Therefore $\Omega(N,E,V)$ is simply the number of possible sets of $(n_x,n_y,n_z)$ that satisfy the equation above. For $\Omega(N,E,V)$, the equation is naturally also just
+\[
+    \sum_{i=1}^{3N} n_i^{2} = \frac{8m V^{2/3} E}{h^{2}} \equiv E^{*}.
+\]
+From this we infer that $S(N,E,V) = S(N,\lambda(E,V))$.
+Therefore, when $S$ and $N$ are constant (reversible adiabatic),
+\[
+    V^{2/3}E = \mathrm{const} \xRightarrow{P=\frac{2}{3}\frac{E}{V}} P V^{5/3} = \mathrm{const}.
+\]
+
+\paragraph{III. Actual Number of Microstates and Specific Heat (Distinguishable).}
+Consider first $\Sigma(N,\lambda<E^{*})$, the number of points within the ``positive compartment'' of a $3N$-sphere (just like we divide by $\frac{1}{8}$ in the 1-particle case):
+\[
+    \Sigma(N,\lambda<E^{*}) \approx \left(\frac{1}{2}\right)^{N}\frac{\pi^{3N/2}}{(3N/2)!}\,(E^{*})^{3N/2}
+    = \left(\frac{V}{h^{3}}\right)^{N}\frac{(2\pi m E)^{3N/2}}{(3N/2)!}.
+\]
+To obtain $\Omega(N,V,E)$ (or, more practically, $\Omega(N,V, E\le E^{*}<E+\Delta)$) we need
+\[
+    \Omega(N,V,E,\Delta) \approx \frac{\partial\Sigma}{\partial E}\Delta \approx \frac{3N}{2}\Sigma\Delta.
+\]
+So
+\[
+    \boxed{\ln\Omega \approx N\ln\!\left[\frac{V}{h^{3}}\!\left(\frac{2\pi mE}{3N}\right)^{3/2}\right] + \frac{3}{2}N + O(\ln N).}
+\]
+Using $S=k\ln\Omega$:
+\[
+    E(S,V,N) = \frac{3 h^{2} N}{4\pi m V^{2/3}}\exp\!\left(\frac{2S}{3Nk}-1\right).
+\]
+By $\bigl(\frac{\partial E}{\partial S}\bigr)_{N,V} = T$:
+\[
+    E(S,V,N) = \tfrac{3}{2} N k T(S,V,N), \qquad
+    \left(\frac{\partial E}{\partial T}\right)_{N,V} = \boxed{C_V = \tfrac{3}{2} N k}.
+\]
+
+\subsection{Gibbs Paradox}
+The mixing of two identical gases (same species, same temperature, same $N/V$) should give $\Delta S = 0$, since the process is reversible (we could put the wall back). However, plugging the formula of $\ln\Omega$ above gives
+\[
+    \Delta S = k\!\left[N_1\ln\!\left(\frac{N_1+N_2}{N_1}\right) + N_2\ln\!\left(\frac{N_1+N_2}{N_2}\right)\right] \neq 0.
+\]
+By Stirling's formula,
+\[
+    \Delta S \approx k\ln[(N_1+N_2)!] - k\ln(N_1!) - k\ln(N_2!).
+\]
+
+\paragraph{Gibbs's Guess.} What if we just subtract $k\ln N!$ from $S$? In that case,
+\[
+    S = Nk\ln\!\left[\frac{V}{N\lambda}\!\left(\frac{4\pi mE}{3N}\right)^{3/2}\right] + \tfrac{5}{2}Nk
+    = Nk\ln\!\left(\frac{V}{N}\right) + \tfrac{3}{2}Nk\!\left\{\frac{5}{3} + \ln\!\left(\frac{2\pi m kT}{h^{2}}\right)\right\},
+\]
+which is the \textbf{Sackur--Tetrode equation}.
+
+The relations $PV=NkT$, $PV^{5/3}=\mathrm{const}$, $C_v = \tfrac{3}{2}Nk$ still hold.
+Moreover, the followings are only correct after this subtraction ($dA = -S\,dT - P\,dV$):
+
+\begin{itemize}
+    \item \textbf{Chemical Potential.}
+    \[
+        \mu = \pa{E}{N}_{S,V} = E\!\left[\frac{5}{3N} - \frac{2S}{3N^{2}k}\right].
+    \]
+    Check: this equals $\mu = \frac{1}{N}[E + PV - TS] = \frac{G}{N}$, and one finds
+    \[
+        \mu = kT\ln\!\left\{\frac{N}{V}\!\left(\frac{h^{2}}{2\pi mkT}\right)^{3/2}\right\}.
+    \]
+    \item \textbf{Helmholtz Free Energy.}
+    \[
+        A = G - PV = NkT\!\left\{\ln\!\left[\frac{N}{V}\!\left(\frac{h^{2}}{2\pi mkT}\right)^{3/2}\right] - 1\right\}.
+    \]
+\end{itemize}
