@@ -1,0 +1,176 @@
+\chapter{附錄}
+\section{補充：焦耳係數與焦耳--湯姆森係數} \label{sec:JT_coeff}
+
+焦耳的自由膨脹實驗與焦耳--湯姆森節流實驗並\emph{不}直接量測 $\pa{U}{V}_T$ 或 $\pa{H}{P}_T$。它們所量測的是
+\[
+    \mu_J \equiv \pa{T}{V}_U \qquad \text{與} \qquad \mu_{JT} \equiv \pa{T}{P}_H,
+\]
+即在固定 $U$（焦耳）或固定 $H$（焦耳--湯姆森）下的溫度變化。這兩對偏導數之間的連結，是偏導數連鎖律的一個標準應用。
+
+\paragraph{推導。} 用各自方便的變數寫出 $U$ 與 $H$ 的全微分：
+\[
+    \dd U = \pa{U}{V}_T \dd V + \pa{U}{T}_V \dd T,
+    \qquad
+    \dd H = \pa{H}{P}_T \dd P + \pa{H}{T}_P \dd T.
+\]
+在第一式（焦耳）令 $\dd U = 0$、在第二式（焦耳--湯姆森）令 $\dd H = 0$，然後把 $\dd T$ 項移到另一邊並相除：
+\[
+    \pa{T}{V}_U = -\,\frac{\pa{U}{V}_T}{\pa{U}{T}_V},
+    \qquad
+    \pa{T}{P}_H = -\,\frac{\pa{H}{P}_T}{\pa{H}{T}_P}.
+\]
+（這就是所謂的三重乘積恆等式，$\pa{x}{y}_z \pa{y}{z}_x \pa{z}{x}_y = -1$。）兩邊同乘分母並吸收負號，
+\[
+    \boxed{\,\pa{U}{V}_T = -C_V\,\pa{T}{V}_U,\qquad \pa{H}{P}_T = -C_P\,\pa{T}{P}_H\,}.
+\]
+因此，理想氣體在兩個實驗中皆不顯示溫度變化的實驗觀測，等價於 $\pa{U}{V}_T = \pa{H}{P}_T = 0$，這正是我們前面所用到的。
+
+\paragraph{焦耳的實驗。}
+一氣體佔據一個絕熱、剛性容器的一半；另一半為真空。隔膜被刺破，氣體自由膨脹。\emph{絕熱} $\Rightarrow$ $\dbar Q = 0$。\emph{向真空自由膨脹}：沒有外壓抵抗氣體前緣的運動，故 $\dbar W = 0$。由第一定律 $\dd U = 0$。焦耳量測氣體（及其周圍水浴）的溫度變化，發現對稀薄氣體而言可忽略——因此 $\pa{T}{V}_U \approx 0$，等價地 $\pa{U}{V}_T \approx 0$。
+
+\paragraph{焦耳--湯姆森實驗。}
+氣體在一絕熱管中被穩定地推過一多孔塞，從高壓 $P_1$ 到低壓 $P_2$。絕熱：$\dbar Q = 0$。\emph{對}氣體所做的功為 $P_1 V_1 - P_2 V_2$（左側推入減去右側推出）。故 $U_2 - U_1 = P_1 V_1 - P_2 V_2$，即
+\[
+    U_1 + P_1 V_1 = U_2 + P_2 V_2 \;\;\Longleftrightarrow\;\; H_1 = H_2.
+\]
+因此此過程為等焓，而在固定 $H$ 下量測 $\Delta T/\Delta P$ 即得焦耳--湯姆森係數。
+
+\section{克勞修斯不等式之證明。} \label{sec:clausius_inequality}
+\begin{lemma}
+對任何熱力學物質而言，內能與壓力透過現代熱力學狀態方程式與絕對溫度 $T$ 相關聯：
+\[
+\left(\frac{\partial U}{\partial V}\right)_T + P = T\left(\frac{\partial P}{\partial T}\right)_V
+\]
+\end{lemma}
+
+\begin{proof}
+考慮一個在 $(T,V)$ 狀態空間平面上圍住微小面積 $dT\,dV$ 的無窮小可逆卡諾循環。
+
+1. \textbf{淨功（$dW$）：} 沿此封閉邊界所執行的淨功由循環積分 $\oint P\,dV$ 給出。我們利用雅可比行列式，從 $(P,V)$ 平面做座標變換至 $(T,V)$ 平面：
+\[
+dW = \iint_\Omega \frac{\partial(P,V)}{\partial(T,V)}\,dT\,dV = \iint_\Omega \left[ \left(\frac{\partial P}{\partial T}\right)_V \left(\frac{\partial V}{\partial V}\right)_T - \left(\frac{\partial P}{\partial V}\right)_T \left(\frac{\partial V}{\partial T}\right)_V \right] dT\,dV
+\]
+由於 $\left(\frac{\partial V}{\partial V}\right)_T = 1$ 且 $\left(\frac{\partial V}{\partial T}\right)_V = 0$，雅可比簡化為：
+\[
+dW = \left(\frac{\partial P}{\partial T}\right)_V dT\,dV
+\]
+
+2. \textbf{吸收的熱（$Q_H$）：} 熱在溫度 $T$ 的等溫膨脹步驟中被吸收。沿一條等溫線 $dT = 0$。可逆過程的第一定律 $\delta Q_{\text{rev}} = dU + P\,dV$ 透過連鎖律展開為：
+\[
+\delta Q_{\text{rev}} = \left(\frac{\partial U}{\partial T}\right)_V dT + \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV
+\]
+令 $dT = 0$，無窮小膨脹步驟的熱輸入為：
+\[
+Q_H = \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV
+\]
+
+由克耳文勳爵對絕對溫標的形式定義，運作於 $T+dT$ 與 $T$ 之間的熱機，其效率 $\eta$ 嚴格地僅取決於這些絕對溫度：
+\[
+\eta = \frac{dW}{Q_H} = \frac{dT}{T}
+\]
+將我們對 $dW$ 與 $Q_H$ 的幾何表示式代入此效率關係式得：
+\[
+\frac{\left(\frac{\partial P}{\partial T}\right)_V dT\,dV}{\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV} = \frac{dT}{T}
+\]
+從兩邊消去微分量 $dT$ 與 $dV$ 並重新整理各項，即得所求結果：
+\[
+\left(\frac{\partial U}{\partial V}\right)_T + P = T\left(\frac{\partial P}{\partial T}\right)_V
+\]
+\end{proof}
+
+\begin{theorem}[克勞修斯等式]
+對於單連通熱力學狀態空間中任一封閉的可逆路徑 $C$，所傳遞之熱除以絕對溫度的循環積分為零：
+\[
+\oint_C \frac{\delta Q_{\text{rev}}}{T} = 0
+\]
+\end{theorem}
+
+\begin{proof}
+令 $(T,V)$ 為張開熱力學狀態空間的獨立座標。我們把繞著任一封閉曲線 $C$（其圍住一單連通區域 $\Omega$）的線積分表示為：
+\[
+\oint_C \frac{\delta Q_{\text{rev}}}{T} = \oint_C \left( \frac{1}{T}\left(\frac{\partial U}{\partial T}\right)_V dT + \frac{1}{T}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] dV \right)
+\]
+這代表一個古典的平面微分形式 $\oint_C (M\,dT + N\,dV)$，其中：
+\[
+M(T,V) = \frac{1}{T}\left(\frac{\partial U}{\partial T}\right)_V, \quad N(T,V) = \frac{1}{T}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]
+\]
+套用平面上的格林定理，我們把沿邊界 $C = \partial \Omega$ 的線積分映射為對曲面區域 $\Omega$ 的雙重積分：
+\[
+\oint_C (M\,dT + N\,dV) = \iint_\Omega \left( \frac{\partial N}{\partial T} - \frac{\partial M}{\partial V} \right) dT\,dV
+\]
+我們用乘積律計算各自的交叉導數。首先，將 $N$ 在固定 $V$ 下對 $T$ 微分：
+\[
+\frac{\partial N}{\partial T} = -\frac{1}{T^2}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] + \frac{1}{T}\left[ \frac{\partial^2 U}{\partial T \partial V} + \left(\frac{\partial P}{\partial T}\right)_V \right]
+\]
+其次，將 $M$ 在固定 $T$ 下對 $V$ 微分：
+\[
+\frac{\partial M}{\partial V} = \frac{1}{T}\frac{\partial^2 U}{\partial V \partial T}
+\]
+假設內能 $U(T,V)$ 是平滑、恰當的狀態函數，由克萊羅定理其混合偏導數可交換（$\frac{\partial^2 U}{\partial T \partial V} = \frac{\partial^2 U}{\partial V \partial T}$）。計算被積函數 $(\frac{\partial N}{\partial T} - \frac{\partial M}{\partial V})$ 時，$U$ 的二階導數完美地相消：
+\[
+\frac{\partial N}{\partial T} - \frac{\partial M}{\partial V} = -\frac{1}{T^2}\left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] + \frac{1}{T}\left(\frac{\partial P}{\partial T}\right)_V
+\]
+援引引理 1，將 $\left(\frac{\partial U}{\partial V}\right)_T + P = T\left(\frac{\partial P}{\partial T}\right)_V$ 代入方括號項：
+\[
+\frac{\partial N}{\partial T} - \frac{\partial M}{\partial V} = -\frac{1}{T^2}\left[T\left(\frac{\partial P}{\partial T}\right)_V\right] + \frac{1}{T}\left(\frac{\partial P}{\partial T}\right)_V = 0
+\]
+由於此熱力學 1-形式的旋度在 $\Omega$ 內處處恆為零，面積分的值為零：
+\[
+\oint_C \frac{\delta Q_{\text{rev}}}{T} = \iint_\Omega (0)\,dT\,dV = 0
+\]
+因此，$\frac{\delta Q_{\text{rev}}}{T}$ 構成一個恰當微分 $dS$，證明了克勞修斯等式。
+\end{proof}
+
+\section{正則系綜：系統的系綜} \label{appendix:ensemble}
+\begin{theorem}[波茲曼分布，系統版本]
+考慮一個由 $\mathcal{N}$ 個全同系統組成、共享總能量 $E$ 的系綜。
+處於能量 $E_r$ 的系統數目為 $n_r$。我們有
+\[
+    \sum_r n_r = \mathcal{N},\qquad \sum_r n_r E_r = E.
+\]
+$\{n_r\}$ 的最可能分布由下式給出
+\[
+    \frac{n_r}{\mathcal{N}} = \frac{\exp(-\beta E_r)}{\sum_r \exp(-\beta E_r)},
+\]
+其中 $\beta$ 滿足
+\[
+    \frac{E}{\mathcal{N}} = \frac{\sum_r E_r \exp(-\beta E_r)}{\sum_r \exp(-\beta E_r)}.
+\]
+\end{theorem}
+
+\begin{proof}
+對每一組 $\{n_r\}$，有 $W(\{n_r\}) = \dfrac{\mathcal{N}!}{n_1!\,n_2!\,\cdots}$ 種簡併。
+我們要把 $W$ 最大化。史特靈近似給出
+\[
+    \ln W \approx \mathcal{N}\ln\mathcal{N} - \sum_r n_r \ln n_r.
+\]
+引入拉格朗日乘子（以 $\alpha$ 對應 $\sum n_r = \mathcal{N}$，以 $\beta$ 對應 $\sum n_r E_r = E$）。我們有
+\[
+    \frac{d\ln W}{dn_r} = -(\ln n_r + 1) - \alpha - \beta E_r = 0.
+\]
+因此
+\[
+    \frac{n_r}{\mathcal{N}} = \frac{\exp(-\beta E_r)}{\sum_r\exp(-\beta E_r)},
+\]
+其中 $\beta$ 滿足
+\[
+    \frac{E}{\mathcal{N}} = \frac{\sum_r E_r \exp(-\beta E_r)}{\sum_r\exp(-\beta E_r)}. \qedhere
+\]
+\end{proof}
+
+\begin{remark}
+一群全同的系統構成一個正則系綜：每個系統都置身於一群其他 $\mathcal{N}-1$ 個系統之中，而後者基本上就是一個熱庫。
+\end{remark}
+
+\begin{theorem}[大-$\mathcal{N}$ 法則]
+當 $\mathcal{N}\to\infty$ 時，能量 $E_r$ 對應的
+\[
+    \avg{n_r} \equiv \frac{\sum_{\{n_r\}\text{ 容許}} n_r W(\{n_r\})}{\sum_{\{n_r\}\text{ 容許}} W(\{n_r\})}
+\]
+收斂至 $n_r^{*}$，即前一定理中最可能的 $n_r$，且變異
+$\bigl\langle (\Delta n_r/\avg{n_r})^{2}\bigr\rangle$ 亦收斂至 $0$。
+\end{theorem}
+
+\begin{proof}
+見教科書。（太複雜了。）
+\end{proof}

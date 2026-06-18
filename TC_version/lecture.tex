@@ -1,0 +1,135 @@
+% =============================================================
+%  lecture.tex
+%  IPhO 培訓講義主檔（教科書式編譯）。
+%
+%  編譯指令：    xelatex lecture.tex
+%
+%  每個主題各自存放於本目錄下的獨立檔案，並由下方的
+%  \input 引入。新增章節的方式：
+%      1. 建立以 `\chapter{...}` 開頭的 <topic>.tex
+%      2. 在下方「正文」區塊中列出該檔
+% =============================================================
+
+\documentclass[11pt,a4paper,openany]{book}
+
+% ---------- 核心數學與符號 ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+
+% ---------- 版面 ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{parskip}        % 段落間以空行分隔，首行不縮排
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{framed}
+
+% ---------- 字型 ----------
+\usepackage{fontspec}
+\usepackage{unicode-math}
+
+% ---------- 中文字型（繁體中文） ----------
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK TC}[AutoFakeSlant=0.2]
+\setCJKsansfont{Noto Sans CJK TC}[AutoFakeSlant=0.2]
+\setCJKmonofont{Noto Sans Mono CJK TC}[AutoFakeSlant=0.2]
+
+% ---------- 圖形、顏色、連結 ----------
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage[hidelinks,
+            colorlinks=true,
+            linkcolor=blue!60!black,
+            urlcolor=blue!60!black,
+            citecolor=blue!60!black]{hyperref}
+
+% ---------- 較美觀的章節標題 ----------
+\usepackage[explicit]{titlesec}
+\titleformat{\chapter}[display]
+    {\normalfont\Huge\bfseries}
+    {\filright\Large 第\,\thechapter\,章}
+    {1ex}
+    {\titlerule\vspace{1ex}\filright #1}
+\titlespacing*{\chapter}{0pt}{-30pt}{30pt}
+
+% ---------- 類定理環境 ----------
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{推論}
+\newtheorem{lemma}[theorem]{引理}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{example}[theorem]{範例}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{附註}
+\newtheorem*{note}{備註}
+
+% ---------- 標準標籤的中文化 ----------
+\renewcommand{\contentsname}{目錄}
+\renewcommand{\bibname}{參考文獻}
+\renewcommand{\indexname}{索引}
+\renewcommand{\figurename}{圖}
+\renewcommand{\tablename}{表}
+\renewcommand{\proofname}{證明}
+
+% 章節頁首：與內文的「第 N 章」一致（避免出現英文 "CHAPTER"）
+\renewcommand{\chaptermark}[1]{\markboth{第\,\thechapter\,章\quad #1}{}}
+
+% ---------- 共用數學速記 ----------
+% （各子檔可用 \providecommand 定義相同名稱；以最先定義者為準。）
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dbar}{\mathop{\overline{\mathrm{d}}}}    % 非恰當微分
+\newcommand{\pd}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\pa}[2]{\left(\dfrac{\partial #1}{\partial #2}\right)}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\zh}[1]{{#1}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\E}{\bar{E}}
+\newcommand{\N}{\bar{N}}
+
+% ---------- 後設資料 ----------
+\title{
+    \vspace{2cm}
+    {\Huge\bfseries 物理學選講}\\[0.5em]
+    {\Large IPhO 培訓講義}
+    \vspace{1cm}
+}
+\author{Hung-Wei}
+\date{\today}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+\tableofcontents
+
+% =============================================================
+\mainmatter
+% =============================================================
+
+% ---- 正文：每章一個 \input ----
+\input{classical_thermodynamics.tex}
+\input{statistical_thermodynamics.tex}
+\input{appendix.tex}
+
+% 其他主題可於此新增，例如：
+% \input{kinetic_theory.tex}
+% \input{electromagnetism.tex}
+% \input{optics.tex}
+% \input{modern_physics.tex}
+
+% =============================================================
+\backmatter
+% =============================================================
+
+% 參考文獻、索引等可置於此處。
+% \bibliographystyle{plain}
+% \bibliography{refs}
+
+\end{document}
