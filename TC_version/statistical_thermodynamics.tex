@@ -1,0 +1,354 @@
+\chapter{統計熱力學}
+
+\noindent\textit{參考資料：R.K. Pathria, P.D. Beele. \emph{Statistical Mechanics}, 第~1--8 章。}
+\section{微正則系綜}
+\paragraph{巨觀態與微觀態。}
+\begin{enumerate}
+    \item \textbf{巨觀態：} 在微正則系綜中，巨觀態由 $N,V,E$ 指定。
+    \item \textbf{微觀態：} 古典上，它由所有粒子的位置與動量（相空間）表示；量子力學上，則由佔據各能階的粒子數等表示。
+\end{enumerate}
+
+\paragraph{假設。}
+\begin{enumerate}[label=(\arabic*)]
+    \item 所有微觀態出現的機率均等。
+    \item 系統處於平衡 $\iff$ 系統處於微觀態數目達到最大的巨觀態。
+\end{enumerate}
+
+\textcolor{blue}{Q：當相空間連續時，我們在古典上如何定義「1 個微觀態」？}
+\textbf{答}：一個微觀態 $= h^{k} = h^{3N}$，其中 $k=3N$ 是自由度數目。
+細節請見 Pathria 第 2 章。
+
+\begin{definition}[統計溫度]
+統計溫度 $\beta$ 定義為
+\[
+    \beta = \left(\frac{\partial(\ln\Omega(N,V,E))}{\partial E}\right)_{N,V}.
+\]
+\end{definition}
+
+\begin{theorem}
+兩系統處於平衡的充要條件之一是其 $\beta$ 相等。
+\end{theorem}
+
+\begin{proof}
+考慮兩個可交換能量的系統，其 $N_i,V_i$ 固定。
+總能量 $E_0 = E_1+E_2 = \mathrm{const}$。
+總微觀態數為
+\[
+    \Omega(E_0,E_1) = \Omega_1(E_1)\,\Omega_2(E_0-E_1).
+\]
+最大條件：當 $E_1 = \E_1$ 時，對應的 $\E_2 = E_0-\E_1$ 滿足
+\[
+    \frac{\partial\Omega_1}{\partial E_1}(\E_1)\,\Omega_2(\E_2) - \Omega_1(\E_1)\frac{\partial\Omega_2}{\partial E_2}(\E_2) = 0.
+\]
+因此
+\[
+    \frac{\partial(\ln\Omega_1)}{\partial E_1} = \frac{\partial(\ln\Omega_2)}{\partial E_2}
+    \quad\Longrightarrow\quad \beta_1 = \beta_2. \qedhere
+\]
+\end{proof}
+
+\begin{framed}
+    \textbf{假設。} 普朗克假定：
+    \[
+        S = k\ln\Omega,
+    \]
+\end{framed}
+若此式為真，則在熱力學中我們有 $\bigl(\frac{\partial S}{\partial E}\bigr)_{N,V} = \frac{1}{T}$，於是得到 $k\beta = \tfrac{1}{T}$，即 $\beta = \tfrac{1}{kT}$。
+
+\begin{remark}
+    ……
+    \begin{itemize}
+        \item 普朗克或許是反過來得到這個想法的：他先注意到 $\bigl(\frac{\partial S}{\partial E}\bigr)_{N,V} = \frac{1}{T}$，接著才推想出 $S = k\ln\Omega$ 可能說得通。
+        \item 我們尚未確認此處的 $k$ 確實就是 $k_B$。當我們把這些假設套用到理想氣體時，將看到情況確實如此。
+    \end{itemize}
+\end{remark}
+
+\textbf{\textcolor{blue}{Q：我們如何確認 $S=k\ln\Omega$ 是正確的？}}
+
+\textbf{答：} 我們靠靈感定義統計的 $S$，然後仿照古典熱力學去定義 $T,P,C_v$ 等。
+以理想氣體為例（見下一小節），我們接著發現 $PV=NkT$、$C_V=\frac{3}{2}NkT$ 等，支持了這個猜想。
+
+\begin{proposition}
+若兩系統的體積可被改變，則我們不僅需要 $T_1=T_2$（即 $\beta_1=\beta_2$），還需要
+\[
+    \eta_1 = \eta_2,\qquad \text{其中 } \eta = \left(\frac{\partial\ln\Omega}{\partial V}\right)_{N,E}\bigg|_{V=\bar V}.
+\]
+\end{proposition}
+
+\begin{proof}
+與 $\beta$ 的情形相同。
+\end{proof}
+
+\begin{proposition}
+給定 $S=k\ln\Omega$ 與 $T\,dS = dE + P\,dV - \mu\,dN$，我們有
+\[
+    \eta = \frac{P}{kT}.
+\]
+另一方面，若 $\zeta = \left(\frac{\partial\ln\Omega}{\partial N}\right)_{V,E}\big|_{N=\N}$，則
+\[
+    \zeta = -\frac{\mu}{kT}.
+\]
+\end{proposition}
+
+\subsection{範例：理想氣體}
+
+\paragraph{I. 理想氣體定律。}
+僅憑 $\Omega(N,E,V)\propto V^{N}$ 這一事實，我們便已可得：
+\[
+    \frac{P}{kT} = \frac{N}{V} \quad\Longrightarrow\quad PV = NkT.
+\]
+我們可看出 $k$ 確實就是我們慣用的 $k_B$。
+
+\paragraph{II. 單原子理想氣體於可逆絕熱過程中。}
+單一原子（在盒中）的能量可寫成
+\[
+    \varepsilon = \frac{h^{2}}{8mV^{2/3}}\,(n_x^{2}+n_y^{2}+n_z^{2}).
+\]
+因此 $\Omega(N,E,V)$ 不過就是滿足上式的 $(n_x,n_y,n_z)$ 集合的可能數目。對 $\Omega(N,E,V)$ 而言，方程式自然也就是
+\[
+    \sum_{i=1}^{3N} n_i^{2} = \frac{8m V^{2/3} E}{h^{2}} \equiv E^{*}.
+\]
+由此我們推得 $S(N,E,V) = S(N,\lambda(E,V))$。
+因此，當 $S$ 與 $N$ 固定（可逆絕熱）時，
+\[
+    V^{2/3}E = \mathrm{const} \xRightarrow{P=\frac{2}{3}\frac{E}{V}} P V^{5/3} = \mathrm{const}.
+\]
+
+\paragraph{III. 微觀態的實際數目與比熱（可區分粒子）。}
+首先考慮 $\Sigma(N,\lambda<E^{*})$，即 $3N$ 維球的「正卦限」內的點數（就像在單粒子情形中我們乘上 $\frac{1}{8}$ 那樣）：
+\[
+    \Sigma(N,\lambda<E^{*}) \approx \left(\frac{1}{2}\right)^{N}\frac{\pi^{3N/2}}{(3N/2)!}\,(E^{*})^{3N/2}
+    = \left(\frac{V}{h^{3}}\right)^{N}\frac{(2\pi m E)^{3N/2}}{(3N/2)!}.
+\]
+要得到 $\Omega(N,V,E)$（或更實用地，$\Omega(N,V, E\le E^{*}<E+\Delta)$），我們需要
+\[
+    \Omega(N,V,E,\Delta) \approx \frac{\partial\Sigma}{\partial E}\Delta \approx \frac{3N}{2}\Sigma\Delta.
+\]
+所以
+\[
+    \boxed{\ln\Omega \approx N\ln\!\left[\frac{V}{h^{3}}\!\left(\frac{2\pi mE}{3N}\right)^{3/2}\right] + \frac{3}{2}N + O(\ln N).}
+\]
+利用 $S=k\ln\Omega$：
+\[
+    E(S,V,N) = \frac{3 h^{2} N}{4\pi m V^{2/3}}\exp\!\left(\frac{2S}{3Nk}-1\right).
+\]
+由 $\bigl(\frac{\partial E}{\partial S}\bigr)_{N,V} = T$：
+\[
+    E(S,V,N) = \tfrac{3}{2} N k T(S,V,N), \qquad
+    \left(\frac{\partial E}{\partial T}\right)_{N,V} = \boxed{C_V = \tfrac{3}{2} N k}.
+\]
+
+\subsection{範例}
+
+\zh{波茲曼在19世紀末提出下列猜想：}$S=k \ln \Omega$\zh{，這裡 } $S$ \zh{是熵，}$k$\zh{ 是波茲曼常數，則 }$\Omega$\zh{ 為系統狀態數。考慮 }$N$\zh{ 個單原子分子組成的理想氣體，其內能}
+\[ U=\sum_{j=1}^{N}\frac{|\vec{p}_{j}|^{2}}{2m} \]
+\zh{，這裡 }$m$\zh{ 是氣體分子的質量，}$\vec{p}_{j}$\zh{ 是第 }$j$\zh{ 個氣體分子的動量。}
+
+\zh{若不考慮全同粒子效應則 }$\Omega=\Omega_{1}=\prod_{j=1}^{N}\int\frac{d^{3}x_{j}d^{3}p_{j}}{h^{3}}=\left(\frac{V}{h^{3}}\right)^{N}A_{3N-1}(\sqrt{2mU})$\zh{，這裡 }$d^{3}x_{j}d^{3}p_{j}$\zh{ 是第 }$j$\zh{ 個氣體分子的相空間體積，}$V$\zh{ 為系統體積，}$h$\zh{ 是普朗克常數，}$A_{n-1}(R)$\zh{ 代表半徑為 }$R$\text{、}$n-1$\zh{ 維球 }$x_{1}^{2}+x_{2}^{2}+\dots+x_{n}^{2}=R^{2}$\zh{ 的表面積，例如當 }$n=2$\zh{ 時，}$A_{1}(R)=2\pi R$\zh{；當 }$n=3$\zh{ 時，}$A_{2}(R)=4\pi R^{2}$\zh{；可得}
+\[ A_{n-1}(R)=\frac{2(\pi^{n/2})}{\Gamma(\frac{n}{2})}R^{n-1} \]
+\zh{，其中 Gamma 函數 }$\Gamma(z)=\int_{0}^{\infty}x^{z-1}e^{-x}dx$\zh{。}
+
+\zh{若考慮全同粒子效應則 }$\Omega=\Omega_{2}=\frac{1}{N!}\prod_{j=1}^{N}\int\frac{d^{3}x_{j}d^{3}p_{j}}{h^{3}}=\frac{1}{N!}\Omega_{1}$。\zh{在本題中，我們要利用理想氣體系統驗證波茲曼猜想的正確性，且考慮全同粒子效應可以解決 Gibbs paradox。}
+
+\vspace{1.5em}
+\subsection*{\zh{問題}}
+
+\textbf{(A)} \zh{考慮 }$N \gg 1$\zh{ 的極限，利用史特靈近似：當 }$z$\zh{ 為正整數且 }$z \gg 1$\zh{ 時，}$\Gamma(z+1)=z! \approx e^{-z}z^{z}$\zh{，證明用 }$\Omega_{1}$\zh{ 及 }$\Omega_{2}$\zh{ 所求得的熵分別為}
+\begin{align*}
+S_{1}&=k \ln \Omega_{1} \approx Nk\left\{\ln\left[V\left(\frac{4\pi mU}{3h^{2}N}\right)^{3/2}\right]+\frac{3}{2}\right\} \\
+S_{2}&=k \ln \Omega_{2} \approx Nk\left\{\ln\left[\frac{V}{N}\left(\frac{4\pi mU}{3h^{2}N}\right)^{3/2}\right]+\frac{5}{2}\right\}
+\end{align*}
+\zh{若已知內能 }$U$\zh{ 滿足等式 }$dU=TdS-PdV+\mu dN$\zh{，這裡 }$T, P, \mu$\zh{ 為系統的溫度、壓力及化學勢（當系統的熵及體積為不變時，在系統中增加一個粒子所需耗費的能量）。這個等式意味著我們應該將 }$U, T, P, \mu$\zh{ 等物理量視為 }$S, V, N$\zh{ 的函數，即：}
+\[ U=U(S,V,N), \quad T=T(S,V,N), \quad P=P(S,V,N), \quad \mu=\mu(S,V,N) \]
+
+\vspace{0.5em}
+\textbf{(B)} \zh{利用 (A) 小題的結果，由 }$S_{1}$\zh{ 或 }$S_{2}$\zh{ 求出單原子分子理想氣體的內能 }$U$\zh{，並證明理想氣體狀態方程式 }$PV=NkT$\zh{。}
+
+\vspace{0.5em}
+\textbf{(C)} \zh{利用 (A)(B) 小題的結果，由 }$S_{1}$\zh{ 或 }$S_{2}$\zh{ 求理想氣體對應的化學勢 }$\mu_{1}, \mu_{2}$\zh{，以 }$T, V, N$\zh{ 及其他常數表示之。}
+
+\vspace{0.5em}
+\textbf{(D)} \zh{如圖 6 所示，開啟容器中的隔板，使得原本體積皆為 }$V$\text{、}\zh{分子數皆為 }$N$\zh{ 的 }$A, B$\zh{ 兩氣體均勻混合。若兩氣體分子的質量分別為 }$m_{A}, m_{B}$\zh{，分別用 }$S_{1}$\zh{ 及 }$S_{2}$\zh{ 的公式求熵在此過程的變化，即混合前後的變化 }$\Delta S_{1}$\zh{ 與 }$\Delta S_{2}$\text{。}
+
+\vspace{0.5em}
+\textbf{(E)} \zh{如圖 7 所示，開啟容器中的隔板，使得體積皆為 }$V$\text{、}\zh{分子數皆為 }$N$\zh{ 的同一種氣體均勻混合。若氣體的分子質量為 }$m$\zh{，分別用 }$S_{1}$\zh{ 及 }$S_{2}$\zh{ 的公式求熵在此過程的變化 }$\Delta S_{1}$\zh{ 與 }$\Delta S_{2}$\text{。}
+
+\vspace{2em}
+\subsection*{\zh{參考解答推導}}
+
+\textbf{(A) \zh{解答推導}} \\
+\zh{首先考慮不區分全同粒子的狀態數 } $\Omega_1$：
+\[ \Omega_{1} = \left(\frac{V}{h^{3}}\right)^{N} A_{3N-1}(\sqrt{2mU}) \]
+\zh{當粒子數 } $N \gg 1$ \zh{時，將 }$n = 3N$\zh{ 代入球表面積公式 } $A_{n-1}(R) = \frac{2\pi^{n/2}}{\Gamma(n/2)}R^{n-1}$\zh{ 可得：}
+\[ \Omega_{1} = \left(\frac{V}{h^{3}}\right)^{N} \cdot \frac{2\pi^{\frac{3}{2}N}}{\Gamma\left(\frac{3}{2}N\right)} (2mU)^{\frac{3N-1}{2}} \approx \left(\frac{V}{h^{3}}\right)^{N} \cdot \frac{2\pi^{\frac{3}{2}N}}{\left(\frac{3}{2}N-1\right)!} (2mU)^{\frac{3N}{2}} \]
+\zh{利用波茲曼熵公式 } $S_1 = k \ln \Omega_1$ \zh{並取對數：}
+\[ S_{1} = Nk \ln \left[ V \left(\frac{2\pi mU}{h^{2}}\right)^{3/2} \right] - k \ln\left[\left(\frac{3}{2}N\right)!\right] + k \ln 2 \]
+\zh{利用史特靈近似（Stirling's approximation）} $\ln(x!) \approx x \ln x - x$ \zh{展開連乘項：}
+\[ \ln\left[\left(\frac{3}{2}N\right)!\right] \approx \frac{3}{2}N \ln \left(\frac{3}{2}N\right) - \frac{3}{2}N \]
+\zh{代入回原式整理：}
+\[ S_{1} \approx Nk \left\{ \ln \left[ V \left(\frac{2\pi mU}{h^{3}}\right)^{3/2} \right] - \frac{3}{2} \ln \left(\frac{3}{2}N\right) + \frac{3}{2} \right\} \]
+\[ \implies S_{1} = Nk \left\{ \ln \left[ V \left(\frac{4\pi mU}{3Nh^{2}}\right)^{3/2} \right] + \frac{3}{2} \right\} \]
+
+\zh{接著考慮全同粒子效應，狀態數變為 } $\Omega_2 = \frac{\Omega_1}{N!}$：
+\[ S_{2} = S_{1} - k \ln N! \approx S_{1} - k (N \ln N - N) \]
+\zh{將其與 } $S_1$ \zh{合併整理，即可得到符合可加性的熵公式（Sackur-Tetrode 方程式）：}
+\[ S_{2} = Nk \left\{ \ln \left[ \frac{V}{N} \left(\frac{4\pi mU}{3Nh^{2}}\right)^{3/2} \right] + \frac{5}{2} \right\} \]
+
+\vspace{1em}
+\textbf{(B) \zh{解答推導}} \\
+\zh{以 } $S_1$ \zh{的公式為例，將其移項以將內能 } $U$ \zh{表示為 } $S_1, V, N$ \zh{的函數：}
+\[ V \cdot \left(\frac{4\pi mU}{3Nh^{2}}\right)^{3/2} = \exp\left(\frac{S_{1}}{Nk} - \frac{3}{2}\right) \]
+\[ \implies U(S_1, V, N) = \frac{3Nh^{2}}{4\pi m} \cdot V^{-2/3} \exp\left(\frac{2S_{1}}{3Nk} - 1\right) \]
+\zh{回顧熱力學基本關係式 } $dU = T\,dS - P\,dV + \mu\,dN$ \zh{可知：}
+\[ \left(\frac{\partial U}{\partial S}\right)_{V,N} = T, \quad \left(\frac{\partial U}{\partial V}\right)_{S,N} = -P \]
+\zh{對上面的 } $U$ \zh{函數求偏微分：}
+\[ T = \left(\frac{\partial U}{\partial S_1}\right)_{V,N} = \frac{2}{3Nk} U \implies U = \frac{3}{2}NkT \]
+\[ -P = \left(\frac{\partial U}{\partial V}\right)_{S,N} = -\frac{2}{3} \frac{U}{V} \implies P = \frac{2}{3} \frac{U}{V} \]
+\zh{結合兩式消去 } $U$\zh{，即可證明理想氣體狀態方程式：}
+\[ PV = \frac{2}{3}U = \frac{2}{3}\left(\frac{3}{2}NkT\right) \implies PV = NkT \]
+\zh{（若使用 } $S_2$ \zh{的公式進行相同推導，亦可得到完全相同的結論。）}
+
+\vspace{1em}
+\textbf{(C) \zh{解答推導}} \\
+\zh{化學勢的熱力學定義在固定 } $U, V$ \zh{下，可表示為 } $\mu = -T \left(\frac{\partial S}{\partial N}\right)_{U,V}$：
+
+\zh{1. 由 } $S_1$ \zh{公式求出的化學勢 } $\mu_1$：
+\[ \frac{\mu_1}{-T} = \left(\frac{\partial S_1}{\partial N}\right)_{U,V} = \frac{S_1}{N} + Nk \cdot \left(-\frac{3}{2N}\right) = \frac{S_1}{N} - \frac{3}{2}k \]
+\[ \implies \mu_1 = -\frac{T S_1}{N} + \frac{3}{2}kT = -kT \ln\left[ V \left(\frac{4\pi mU}{3Nh^2}\right)^{3/2} \right] \]
+\zh{利用 } $U = \frac{3}{2}NkT$ \zh{將內能轉換為溫度 } $T$\zh{，可得：}
+\[ \mu_1 = -kT \ln\left[ V \left(\frac{2\pi mkT}{h^2}\right)^{3/2} \right] \]
+
+\zh{2. 由 } $S_2$ \zh{公式求出的化學勢 } $\mu_2$：
+\zh{同理，對 } $S_2$ \zh{關於 } $N$ \zh{求偏微分（注意此時對數項內有 } $V/N$ \zh{與分母的 } $N$\zh{）：}
+\[ \left(\frac{\partial S_2}{\partial N}\right)_{U,V} = \frac{S_2}{N} - k - \frac{3}{2}k = \frac{S_2}{N} - \frac{5}{2}k \]
+\[ \implies \mu_2 = -\frac{T S_2}{N} + \frac{5}{2}kT = -kT \ln\left[ \frac{V}{N} \left(\frac{4\pi mU}{3Nh^2}\right)^{3/2} \right] \]
+\zh{同樣以 } $U = \frac{3}{2}NkT$ \zh{表示，可得符合強度性質（intensive property）的化學勢：}
+\[ \mu_2 = -kT \ln\left[ \frac{V}{N} \left(\frac{2\pi mkT}{h^2}\right)^{3/2} \right] \]
+
+\vspace{1em}
+\textbf{(D) \zh{解答推導}} \\
+\zh{若混合的兩種氣體 } $A, B$ \zh{為不同的氣體，且混合前已處於熱平衡，則混合過程中各組分的總內能 } $U$ \zh{與各自的粒子數 } $N$ \zh{皆不變。但各組分可佔據的體積皆由 } $V$ \zh{變為 } $2V$。
+
+\zh{使用 } $S_1$ \zh{公式（不考慮全同粒子效應）計算熵變化量：}
+\[ \Delta S_{1} = Nk \ln \frac{2V}{V} + Nk \ln \frac{2V}{V} = 2Nk \ln 2 \]
+\zh{使用 } $S_2$ \zh{公式（考慮全同粒子效應）計算熵變化量，由於 } $A, B$ \zh{為不同粒子，全同性只存在於同種分子內部，因此結果相同：}
+\[ \Delta S_{2} = 2Nk \ln 2 \]
+\zh{此時兩種公式皆預測有混合熵（} $\Delta S > 0$ \zh{），符合實驗觀測。}
+
+\vspace{1em}
+\textbf{(E) \zh{解答推導}} \\
+\zh{若開啟隔板混合的是「同一種」氣體，整個系統必須視為一個整體來處理。混合後，總粒子數變為 } $2N$\zh{，總體積變為 } $2V$\zh{，總內能變為 } $2U$。
+
+\zh{1. 若使用不具備可加性的 } $S_1$ \zh{公式：}
+\[ \Delta S_{1} = S_{1,\text{後}} - S_{1,\text{前}} = (2N)k \left\{ \ln \left[ 2V \left(\frac{4\pi m(2U)}{3(2N)h^{2}}\right)^{3/2} \right] + \frac{3}{2} \right\} - 2 \cdot Nk \left\{ \ln \left[ V \left(\frac{4\pi mU}{3Nh^{2}}\right)^{3/2} \right] + \frac{3}{2} \right\} \]
+\[ \implies \Delta S_{1} = 2Nk \ln (2V) - 2Nk \ln V = 2Nk \ln 2 \]
+\zh{這導出了「同種氣體混合也會產生額外熵」的非物理結論（即吉布斯悖論）。}
+
+\zh{2. 若使用考慮全同粒子的 } $S_2$ \zh{公式：}
+\zh{由於 } $S_2$ \zh{公式中的體積項為比容 } $\frac{V}{N}$\zh{，而混合前後 } $\frac{2V}{2N} = \frac{V}{N}$ \zh{保持不變，且能量密度 } $\frac{2U}{2N} = \frac{U}{N}$ \zh{亦不變，因此：}
+\[ \Delta S_{2} = 0 \]
+
+\section{正則系綜}
+\begin{definition}
+\emph{正則系綜}是一種以 $N,V,T$ 來定義其微觀態的系綜。
+\end{definition}
+
+不同的 $E$ 但相同的 $N,V,T$ $\Longrightarrow$ 同一巨觀態的不同微觀態！
+
+\begin{theorem}[波茲曼分布，熱庫版本]
+對於一個由熱庫及置於其中之系統所構成的孤立系統，該系統處於某能量為 $E_r$ 之微觀態的機率正比於 $\exp(-\beta E_r)$。
+\end{theorem}
+
+\begin{proof}
+令總能量為 $E^{(0)}$，並令小系統處於某能量為 $E_r$ 的微觀態。對大多數狀態而言，$E_r \ll E^{(0)}$。此微觀態發生的機率為
+\[
+    P_r = \frac{1\cdot\Omega'\!\bigl(E^{(0)} - E_r\bigr)}{\Omega_{\mathrm{total}}\text{（完整系統）}}.
+\]
+在 $E_r \approx 0$ 處展開，
+\[
+    \ln\Omega'\!\bigl(E^{(0)} - E_r\bigr)
+    \approx \ln\Omega'\!\bigl(E^{(0)}\bigr)
+    - \frac{\partial\ln\Omega'}{\partial E'}\bigg|_{E^{(0)}}\!E_r
+    = \mathrm{const} - \beta E_r.
+\]
+因此 $\Omega' \propto \exp(-\beta E_r)$。
+\end{proof}
+
+\begin{remark}
+    ……
+    \begin{enumerate}
+        \item 若熱庫不夠大，機率將偏離此分布。那麼，熱庫究竟需要多大？
+        以一個系統的\textbf{系綜}來討論，或許能對此問題提供一些洞見。細節見附錄 \ref{appendix:ensemble}。
+        \item 在歷史上，波茲曼分布（大概）是用系統的系綜推導出來的。然而，我個人認為，除非
+        我們想討論熱庫的尺寸效應，否則這並非必要。這就是我選擇把系綜版本放在附錄中的原因。
+    \end{enumerate}
+\end{remark}
+
+\subsection{與古典熱力學的連結}
+有了波茲曼分布，我們便能定義配分函數 $Q_N$：
+\[
+    Q_N = \sum_r \exp(-\beta E_r).
+\]
+它正是所有微觀態權重的總和。此外，系統處於能量為 $E_r$ 之微觀態的機率為
+\[
+    P_r = \frac{\exp(-\beta E_r)}{Q_N}.
+\]
+
+機率既已明確得知，我們便能（例如）計算能量的期望值：
+\[
+    \langle E \rangle = \frac{\sum_r E_r\exp(-\beta E_r)}{\sum_r \exp(-\beta E_r)}
+    = -\frac{\partial}{\partial\beta}\ln Q_N
+\]
+
+注意我說的是「期望值」。確實，在正則系綜中，$E$ 的精確值會漲落。
+記得吧，我剛說過 $E$ 被視為微觀態的標籤。
+然而在古典熱力學中我們知道，給定 $N, V, T$，仍能良好定義性質 $U$。
+這是因為——正如我們即將看到的——在熱力學極限下 $E$ 的相對漲落可忽略。
+考慮 $\dfrac{\partial \langle E \rangle}{\partial\beta}$：
+\[
+    \frac{\partial \langle E \rangle}{\partial\beta}
+    = -\frac{\sum_r E_r^{2}\exp(-\beta E_r)}{\sum_r \exp(-\beta E_r)}
+    + \frac{\bigl[\sum_r E_r\exp(-\beta E_r)\bigr]^{2}}{\bigl[\sum_r\exp(-\beta E_r)\bigr]^{2}}
+    = -\avg{E^{2}} + \avg{E}^{2}.
+\]
+因此，利用連鎖律以及 E 是廣延變數這一事實，
+\[
+    \avg{(\Delta E)^{2}} = kT^{2} \frac{\partial \avg{E}}{\partial T} ,\qquad
+    \frac{\sqrt{\avg{(\Delta E)^{2}}}}{\avg{E}} = \frac{\sqrt{kT^{2} \frac{\partial \avg{E}}{\partial T}}}{\avg{E}} \propto N^{-1/2}.
+\]
+
+現在終於可以安心地說：
+\[
+    U = -\frac{\partial}{\partial\beta}\ln Q_N.
+\]
+
+我們準備好推導其他狀態變數了。依慣例，我們會先推導亥姆霍茲能。
+（如此一來就不必處理二階導數。）在古典熱力學中：
+\[
+    U = A + TS = -T^{2}\!\left[\frac{\partial(A/T)}{\partial T}\right]_{N,V}
+    = \left[\frac{\partial(A/T)}{\partial(1/T)}\right]_{N,V} = -\frac{\partial}{\partial\beta}\ln Q_N.
+\]
+
+透過「通靈」（\zh{通靈}），我們可以發現下列的 $A$ 滿足上式：
+\[
+    \boxed{\,A(N,V,T) = -kT\ln Q_N(V,T)\,}.
+\]
+
+一旦 $A$ 已知，其餘所有熱力學量皆可由 $dA = -S\,dT - P\,dV + \mu\,dN$ 導出：
+\[
+    C_v = -T\!\left(\frac{\partial^{2} A}{\partial T^{2}}\right)_{N,V},\quad
+    P = -\!\left(\frac{\partial A}{\partial V}\right)_{N,T},\quad
+    \mu = \!\left(\frac{\partial A}{\partial N}\right)_{V,T},\quad
+    S = -\!\left(\frac{\partial A}{\partial T}\right)_{N,V}.
+\]
+
+\paragraph{一致性檢驗。}
+\begin{enumerate}[label=(\arabic*)]
+    \item $N\mu = A + PV$（廣延系統的歐拉關係式）。
+    \item 起始定義 $S = -k\sum_r P_r\ln P_r$ 在微正則系綜中化約為 $S = k\ln\Omega$，此時在能量殼層上 $P_r = 1/\Omega$。
+    \item 功的辨識式 $P\,dV = -\sum_r P_r\,dE_r$ 正是下列陳述
+    \[
+        P\,dV = -d\bar E\big|_{S,N},
+    \]
+    因為在固定 $\{P_r\}$（從而固定 $S$ 與 $N$）下，$d\bar E = \sum_r E_r\,dP_r + \sum_r P_r\,dE_r$ 中只有第二項存留。
+\end{enumerate}
