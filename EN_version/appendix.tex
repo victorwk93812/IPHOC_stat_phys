@@ -119,4 +119,58 @@ Because the curl of this thermodynamic 1-form vanishes identically everywhere wi
 \oint_C \frac{\delta Q_{\text{rev}}}{T} = \iint_\Omega (0)\,dT\,dV = 0
 \]
 Thus, $\frac{\delta Q_{\text{rev}}}{T}$ constitutes an exact differential $dS$, proving the Clausius Equality.
+\end{proof} 
+
+\section{Canonical Ensemble: An ensemble of systems} \label{appendix:ensemble}
+\begin{theorem}[Boltzmann distribution, system version]
+Consider an ensemble of $\mathcal{N}$ identical systems sharing total energy $E$.
+The number of systems in energy $E_r$ is $n_r$. We have
+\[
+    \sum_r n_r = \mathcal{N},\qquad \sum_r n_r E_r = E.
+\]
+The most probable distribution of $\{n_r\}$ is given by
+\[
+    \frac{n_r}{\mathcal{N}} = \frac{\exp(-\beta E_r)}{\sum_r \exp(-\beta E_r)},
+\]
+where $\beta$ satisfies
+\[
+    \frac{E}{\mathcal{N}} = \frac{\sum_r E_r \exp(-\beta E_r)}{\sum_r \exp(-\beta E_r)}.
+\]
+\end{theorem}
+
+\begin{proof}
+For each set of $\{n_r\}$, there are $W(\{n_r\}) = \dfrac{\mathcal{N}!}{n_1!\,n_2!\,\cdots}$ degeneracies.
+We want to maximize $W$. Stirling gives
+\[
+    \ln W \approx \mathcal{N}\ln\mathcal{N} - \sum_r n_r \ln n_r.
+\]
+Introduce Lagrange multipliers ($\alpha$ for $\sum n_r = \mathcal{N}$, $\beta$ for $\sum n_r E_r = E$). We have
+\[
+    \frac{d\ln W}{dn_r} = -(\ln n_r + 1) - \alpha - \beta E_r = 0.
+\]
+Thus
+\[
+    \frac{n_r}{\mathcal{N}} = \frac{\exp(-\beta E_r)}{\sum_r\exp(-\beta E_r)},
+\]
+where $\beta$ satisfies
+\[
+    \frac{E}{\mathcal{N}} = \frac{\sum_r E_r \exp(-\beta E_r)}{\sum_r\exp(-\beta E_r)}. \qedhere
+\]
+\end{proof}
+
+\begin{remark}
+A collection of identical systems forms a canonical ensemble: each system sits in a collection of $\mathcal{N}-1$ other systems, which is basically just a reservoir.
+\end{remark}
+
+\begin{theorem}[Big-$\mathcal{N}$ Rule]
+As $\mathcal{N}\to\infty$,
+\[
+    \avg{n_r} \equiv \frac{\sum_{\{n_r\}\text{ allowed}} n_r W(\{n_r\})}{\sum_{\{n_r\}\text{ allowed}} W(\{n_r\})}
+\]
+for energy $E_r$ converges to $n_r^{*}$, the most probable $n_r$ in the previous theorem, and the variation
+$\bigl\langle (\Delta n_r/\avg{n_r})^{2}\bigr\rangle$ also converges to $0$.
+\end{theorem}
+
+\begin{proof}
+See textbook. (Too complicated.)
 \end{proof}
